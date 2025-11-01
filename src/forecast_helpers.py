@@ -671,24 +671,56 @@ def plot_total_panel(res: ForecastResult):
     plt.show()
 
 
-def plot_category_panels(res: ForecastResult):
+def plot_category_panels(res: ForecastResult, top_k: int | None = None):
     """
-    One subplot per category, shared y-lims, with actuals + forecast median + 90% PI.
-    Creates one figure (no seaborn, no custom colors).
+    One subplot per category (optionally only the top_k), shared y-lims,
+    with actuals + forecast median + 90% PI. Creates one figure.
+
+    Ranking for top_k:
+      - Uses the latest available forecast median for each category.
+      - Falls back to last available actual if forecast is missing.
     """
-    cats = list(res.cats)
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    cats_all = list(res.cats)
+
+    # --- pick top_k by latest forecast median (fallback to last actual) ---
+    if top_k is not None and top_k < len(cats_all):
+        last_fore_year = int(res.fore_df.index.max()) if len(res.fore_df.index) else None
+        scores = {}
+        for c in cats_all:
+            val = None
+            if last_fore_year is not None and c in res.fore_df.columns:
+                v = res.fore_df.loc[last_fore_year, c]
+                val = float(v) if np.isfinite(v) else None
+            if val is None:
+                # fallback: last actual (or total actual sum if needed)
+                if c in res.actual_by_year_full.columns:
+                    # prefer last row actual
+                    last_idx = res.actual_by_year_full.index.max()
+                    v2 = res.actual_by_year_full.loc[last_idx, c]
+                    val = float(v2) if np.isfinite(v2) else float(res.actual_by_year_full[c].sum())
+                else:
+                    val = 0.0
+            scores[c] = val
+
+        cats = [c for c, _ in sorted(scores.items(), key=lambda kv: kv[1], reverse=True)[:top_k]]
+    else:
+        cats = cats_all
+
     K = len(cats)
 
-    # y-lims across series
+    # --- y-lims across selected categories ---
     ymins, ymaxs = [], []
     for c in cats:
         series_list = [
-            res.fore_lo[c].values,
-            res.fore_hi[c].values,
-            res.fore_df[c].values,
-            res.actual_by_year_full[c].values,
+            res.fore_lo[c].values if c in res.fore_lo.columns else np.array([]),
+            res.fore_hi[c].values if c in res.fore_hi.columns else np.array([]),
+            res.fore_df[c].values if c in res.fore_df.columns else np.array([]),
+            res.actual_by_year_full[c].values if c in res.actual_by_year_full.columns else np.array([]),
         ]
-        vals = np.concatenate([arr[~np.isnan(arr)] for arr in series_list if np.size(arr) > 0])
+        vals = np.concatenate([arr[~np.isnan(arr)] for arr in series_list if np.size(arr) > 0]) if series_list else np.array([])
         if vals.size > 0:
             ymins.append(vals.min()); ymaxs.append(vals.max())
     ymin = max(0.0, (min(ymins) if ymins else 0.0))
@@ -696,19 +728,32 @@ def plot_category_panels(res: ForecastResult):
     pad = 0.05 * (ymax - ymin if ymax > ymin else 1.0)
     ymin_plot = max(0.0, ymin - pad); ymax_plot = ymax + pad
 
+    # --- plotting ---
     n_rows = K; n_cols = 1
     plt.figure(figsize=(8.2, max(2.6 * n_rows, 3.8)))
     for j, c in enumerate(cats):
         ax = plt.subplot(n_rows, n_cols, j + 1)
-        ax.fill_between(res.years_fore, res.fore_lo[c].values, res.fore_hi[c].values, alpha=0.25, label="90% PI")
-        ax.plot(res.fore_df.index, res.fore_df[c].values, "--", lw=1.8, label="forecast (median)")
-        ax.scatter(res.actual_by_year_full.index, res.actual_by_year_full[c].values, s=12, alpha=0.95, label="actual/est")
-        if res.have_ytd and res.last_month is not None:
-            ytd_cat_val = res.actual_by_ym.loc[(res.actual_by_ym["year"] == res.ytd_year) & (res.actual_by_ym["month"] <= res.last_month), c].sum()
+        if c in res.fore_lo.columns and c in res.fore_hi.columns:
+            ax.fill_between(res.years_fore, res.fore_lo[c].values, res.fore_hi[c].values, alpha=0.25, label="90% PI")
+        if c in res.fore_df.columns:
+            ax.plot(res.fore_df.index, res.fore_df[c].values, "--", lw=1.8, label="forecast (median)")
+        if c in res.actual_by_year_full.columns:
+            ax.scatter(res.actual_by_year_full.index, res.actual_by_year_full[c].values, s=12, alpha=0.95, label="actual/est")
+        if res.have_ytd and res.last_month is not None and c in res.actual_by_ym.columns:
+            ytd_cat_val = res.actual_by_ym.loc[
+                (res.actual_by_ym["year"] == res.ytd_year) & (res.actual_by_ym["month"] <= res.last_month), c
+            ].sum()
             ax.scatter([res.ytd_year], [ytd_cat_val], s=20, marker="x")
-        ax.set_title(str(c)); ax.set_ylabel("Count"); ax.set_xlabel("Year" if j == n_rows - 1 else "")
+        subtitle = f"{str(c)}"
+        ax.set_title(subtitle)
+        ax.set_ylabel("Count"); ax.set_xlabel("Year" if j == n_rows - 1 else "")
         ax.set_ylim(ymin_plot, ymax_plot); ax.grid(True, lw=0.3, alpha=0.5)
-        if j == 0: ax.legend(loc="upper left", fontsize=8)
+        if j == 0:
+            base_title = f"Top {K} of {len(cats_all)}" if (top_k is not None) else None
+            if base_title:
+                ax.legend(loc="upper left", fontsize=8, title=base_title)
+            else:
+                ax.legend(loc="upper left", fontsize=8)
     plt.tight_layout()
     plt.show()
 
