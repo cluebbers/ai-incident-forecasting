@@ -1,0 +1,777 @@
+
+# forecast_helpers.py
+# Reusable helpers to forecast incident counts by category with YTD assimilation, surge-aware shares,
+# monotone totals, and coherent category allocations.
+#
+# Usage (example):
+#   from forecast_helpers import ForecastConfig, forecast_by_category, plot_total_panel, plot_category_panels
+#   cfg = ForecastConfig(YTD_YEAR=2025)
+#   result = forecast_by_category(merged_df, date_col="date", cat_col="Risk Domain", config=cfg)
+#   plot_total_panel(result)
+#   plot_category_panels(result)
+#
+# You can reuse across columns:
+#   for c in ["Risk Domain", "Actor", "Failure Mode"]:
+#       res[c] = forecast_by_category(merged_df, "date", c, cfg)
+#
+# Notes:
+# - Works on row-counts by default. To forecast on weighted totals, pass weight_col="my_value".
+# - Avoids hard dependencies on your outer notebook variables.
+# - Keeps defaults aligned to your current experiment; tune in ForecastConfig.
+
+from dataclasses import dataclass
+from typing import Optional, Dict, Any, List
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from sklearn.pipeline import Pipeline, make_pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import SplineTransformer
+from sklearn.linear_model import PoissonRegressor, LogisticRegression
+from sklearn.isotonic import IsotonicRegression
+
+
+# ----------------------
+# Configuration
+# ----------------------
+
+@dataclass
+class ForecastConfig:
+    # Simulation + randomness
+    B_SIM: int = 1000
+    RANDOM_SEED: int = 42
+
+    # Share blending / dominance control
+    TAU_YEARS: float = 5.0
+    W_HIST_MAX: float = 0.5
+    W_UNIF_MAX: float = 0.2
+
+    # Surge handling
+    RECENT_WIN: int = 4
+    CAT_BOOST_SURGE: float = 3.0
+    SHRINK_SURGE: float = 0.3
+
+    # Growth allocation constraints
+    GROWTH_FLOOR_FRAC: float = 0.05
+    MIN_ABS_GROWTH: float = 1e-6
+    MOM_TILT_MAX: float = 0.3
+    MOM_TAU: float = 5.0
+
+    # Spline / GLM
+    MAX_KNOTS_TOTAL: int = 8
+    MAX_KNOTS_SHARES: int = 10
+    ALPHA_TOTAL: float = 1.0
+
+    # YTD
+    YTD_YEAR: int = 2025
+    YTD_METHOD: str = "ratio_to_average"
+    YTD_MIN_SHARE: float = 0.35
+
+    # Continuity floors (first forecast year)
+    FIRST_YEAR_TOTAL_MIN_INC: float = 1.0
+    FIRST_YEAR_CAT_MIN_INC: float = 1.0
+
+    # Share + growth noise for simulations
+    SHARE_KAPPA: float = 30.0
+    GROWTH_NB_PHI: float = 0.3
+
+    # Forecast horizon end (inclusive upper bound for index creation)
+    END_YEAR: int = 2031
+
+
+@dataclass
+class ForecastResult:
+    # Core outputs
+    fore_df: pd.DataFrame
+    fore_lo: pd.DataFrame
+    fore_hi: pd.DataFrame
+    fore_total: pd.Series
+    fore_total_lo: pd.Series
+    fore_total_hi: pd.Series
+
+    # Context
+    actual_by_year_full: pd.DataFrame
+    actual_by_ym: pd.DataFrame
+    cats: List[str]
+    years_fore: np.ndarray
+    last_year: int
+    have_ytd: bool
+    last_month: Optional[int]
+    ytd_actual_total: Optional[float]
+    ytd_year: int
+    cat_col: str
+    date_col: str
+
+
+# ----------------------
+# Low-level helpers
+# ----------------------
+
+def _make_features(n_knots: int, degree: int = 3, extrapolation: str = "linear", **kwargs) -> ColumnTransformer:
+    return ColumnTransformer([
+        ("spline", SplineTransformer(n_knots=n_knots, degree=degree, extrapolation=extrapolation), [0]),
+        ("linear", "passthrough", [0]),
+    ])
+
+
+def _scale_years(year_array, center):
+    return ((np.asarray(year_array) - center) / 10.0).reshape(-1, 1)
+
+
+def allocate_growth(total_vec: np.ndarray,
+                    raw_mat: np.ndarray,
+                    floor_frac: float = 0.05,
+                    min_abs: float = 1e-6,
+                    mom_weights: Optional[np.ndarray] = None,
+                    mom_tilt_max: float = 0.3,
+                    mom_tau: float = 5.0,
+                    years: Optional[np.ndarray] = None,
+                    last_train: Optional[int] = None) -> np.ndarray:
+    """
+    Turn raw category guidance (per-year shares * totals) into coherent category counts
+    with floors and momentum-tilting. Preserves monotonic non-decreasing path per category.
+    """
+    T, K = raw_mat.shape
+    out = np.zeros_like(raw_mat, dtype=float)
+    out[0] = np.maximum(raw_mat[0], 1e-9)
+    out[0] *= total_vec[0] / max(out[0].sum(), 1e-12)
+    tiny = 1e-12
+
+    for t in range(1, T):
+        prev = out[t - 1]
+        T_prev, T_now = prev.sum(), total_vec[t]
+        G = max(T_now - T_prev, 0.0)
+
+        if G > 0:
+            per_cat_floor = max(min_abs, floor_frac * G / K)
+            total_floor = per_cat_floor * K
+            if total_floor > G:
+                per_cat_floor *= (G / total_floor)
+        else:
+            per_cat_floor = min_abs
+
+        baseline = prev + per_cat_floor
+        S_base = baseline.sum()
+        if S_base > T_now:
+            shrink = (S_base - T_now) / K
+            per_cat_floor = max(0.0, per_cat_floor - shrink)
+            baseline = prev + per_cat_floor
+            S_base = baseline.sum()
+
+        remaining = T_now - S_base
+        shares_t = raw_mat[t] / max(raw_mat[t].sum(), 1e-12)
+
+        if mom_weights is not None and years is not None and last_train is not None:
+            h = max(0.0, years[t] - last_train)
+            tilt = mom_tilt_max * (1.0 - np.exp(-h / mom_tau))
+            shares_t = (1.0 - tilt) * shares_t + tilt * mom_weights
+
+        alloc = remaining * shares_t if remaining > 0 else np.zeros_like(prev)
+        c = baseline + alloc
+
+        resid = c.sum() - T_now
+        if abs(resid) > 1e-10:
+            j = np.argmax(c - prev)
+            c[j] -= resid
+            c[j] = max(c[j], prev[j] + tiny)
+
+        c = np.maximum(c, prev + tiny)
+        out[t] = c
+
+    return out
+
+
+def _avg_cum_share_up_to(m: int, series: pd.Series) -> float:
+    if series.empty:
+        return np.nan
+    s = series.copy()
+    # group by (year, month) table
+    s = s.groupby([s.index.year, s.index.month]).sum().unstack(1).fillna(0.0)
+    cum = s.cumsum(axis=1)
+    tot = s.sum(axis=1).replace(0, np.nan)
+    shares = (cum.div(tot, axis=0)).mean(axis=0)
+    return float(shares.get(m, np.nan))
+
+
+# ----------------------
+# Core pipeline
+# ----------------------
+
+def _build_actuals(df: pd.DataFrame,
+                   date_col: str,
+                   cat_col: str,
+                   weight_col: Optional[str],
+                   ytd_year: int) -> Dict[str, Any]:
+    if date_col not in df.columns:
+        raise KeyError(f"'{date_col}' not found in DataFrame.")
+    if cat_col not in df.columns:
+        raise KeyError(f"'{cat_col}' not found in DataFrame.")
+
+    d = df.copy()
+    d[date_col] = pd.to_datetime(d[date_col], errors="coerce")
+    d = d.dropna(subset=[date_col])
+    d["__year"] = d[date_col].dt.year
+    d["__month"] = d[date_col].dt.month
+    d["__cat"] = d[cat_col].astype("category")
+
+    # value to aggregate: 1 per row by default or weight_col
+    if weight_col and weight_col in d.columns:
+        d["__val"] = pd.to_numeric(d[weight_col], errors="coerce").fillna(0.0)
+    else:
+        d["__val"] = 1.0
+
+    cats_all = d["__cat"].cat.categories
+
+    # Annual totals wide
+    annual = (
+        d.groupby(["__year", "__cat"])["__val"]
+         .sum()
+         .unstack("__cat")
+         .reindex(columns=cats_all)
+         .fillna(0.0)
+    )
+
+    # Monthly totals wide (first of month index)
+    monthly = (
+        d.groupby([pd.Grouper(key=date_col, freq="MS"), "__cat"])["__val"]
+         .sum()
+         .unstack("__cat")
+         .reindex(columns=cats_all)
+         .fillna(0.0)
+    )
+    monthly["year"] = monthly.index.year
+    monthly["month"] = monthly.index.month
+
+    # YTD bookkeeping
+    ymask = (monthly["year"] == ytd_year)
+    months_obs = sorted(monthly.loc[ymask, "month"].unique().tolist())
+    have_ytd = len(months_obs) > 0
+    last_month = max(months_obs) if have_ytd else None
+
+    return dict(
+        annual=annual,
+        monthly=monthly,
+        cats_all=cats_all,
+        have_ytd=have_ytd,
+        last_month=last_month,
+    )
+
+
+def _annualize_ytd(annual: pd.DataFrame,
+                   monthly: pd.DataFrame,
+                   cats_all: pd.Index,
+                   cfg: ForecastConfig) -> Dict[str, Any]:
+    # Use history strictly before YTD_YEAR
+    hist_monthly = monthly[monthly["year"] < cfg.YTD_YEAR].copy()
+    monthly_total = hist_monthly[cats_all].sum(axis=1)
+    hist_monthly["total"] = monthly_total
+
+    have_ytd = (monthly["year"] == cfg.YTD_YEAR).any()
+    months_obs = sorted(monthly.loc[monthly["year"] == cfg.YTD_YEAR, "month"].unique().tolist())
+    last_month = max(months_obs) if (len(months_obs) > 0) else None
+
+    ytd_actual_total = None
+    est_cats_ytd = None
+
+    if have_ytd and last_month is not None:
+        total_series_hist = hist_monthly.set_index(hist_monthly.index)["total"]
+        cum_share_total = _avg_cum_share_up_to(last_month, total_series_hist)
+        if not np.isfinite(cum_share_total) or cum_share_total < cfg.YTD_MIN_SHARE:
+            cum_share_total = cfg.YTD_MIN_SHARE
+
+        # YTD total (sum over months observed in YTD year)
+        ytd_total = monthly.loc[(monthly["year"] == cfg.YTD_YEAR) & (monthly["month"] <= last_month), cats_all].sum(axis=1).sum()
+        ytd_actual_total = float(ytd_total)
+        est_total_full = ytd_total / max(cum_share_total, 1e-9)
+
+        # Per-category YTD sums
+        ytd_cats = monthly.loc[(monthly["year"] == cfg.YTD_YEAR) & (monthly["month"] <= last_month), cats_all].sum()
+
+        # Baseline shares from previous full year, else uniform
+        prev_year = cfg.YTD_YEAR - 1
+        if prev_year in annual.index:
+            base_sh = annual.loc[prev_year]
+            base_sh = (base_sh / base_sh.sum()).values if base_sh.sum() > 0 else np.full(len(cats_all), 1.0 / len(cats_all))
+        else:
+            base_sh = np.full(len(cats_all), 1.0 / len(cats_all))
+
+        remainder = max(est_total_full - ytd_cats.sum(), 0.0)
+        est_cats_ytd = (ytd_cats.values + remainder * base_sh)
+        est_cats_ytd = np.maximum(est_cats_ytd, 0.0)
+
+        # Inject into annual table for continuity
+        annual.loc[cfg.YTD_YEAR, cats_all] = est_cats_ytd
+
+    return dict(
+        annual=annual,
+        monthly=monthly,
+        have_ytd=have_ytd,
+        last_month=last_month,
+        ytd_actual_total=ytd_actual_total,
+    )
+
+
+def _fit_totals_and_shares(annual: pd.DataFrame,
+                           monthly: pd.DataFrame,
+                           cats_all: pd.Index,
+                           cfg: ForecastConfig) -> Dict[str, Any]:
+    # Totals
+    annual_total = annual.sum(axis=1).rename("total").to_frame()
+    years_hist = np.sort(annual_total.index.values)
+    if years_hist.size < 2:
+        raise ValueError("Need at least two years of data for totals.")
+
+    t_mean = years_hist.mean()
+    n_knots_total = max(3, min(cfg.MAX_KNOTS_TOTAL, np.unique(years_hist).size))
+    X_hist_total = _scale_years(years_hist, t_mean)
+
+    total_model = Pipeline([
+        ("features", _make_features(n_knots_total, degree=3, extrapolation="linear")),
+        ("glm", PoissonRegressor(alpha=cfg.ALPHA_TOTAL, max_iter=5000))
+    ])
+    total_model.fit(X_hist_total, annual_total.loc[years_hist, "total"].values)
+
+    # Shares (logistic over classes with recency + surge boosts)
+    last_year = int(years_hist.max())
+    long = annual.stack().rename('count').reset_index()
+    # Ensure expected column labels exist
+    if 'year' not in long.columns:
+        # first col should be the year index
+        long = long.rename(columns={long.columns[0]: 'year'})
+    if 'cat' not in long.columns:
+        # second col should be the category
+        long = long.rename(columns={long.columns[1]: 'cat'})
+    long = long[long['year'].between(int(years_hist.min()), int(years_hist.max()))]
+
+    # Recency
+    win = min(cfg.RECENT_WIN, max(1, len(years_hist)))
+    recency_w = np.where(long["year"] >= (last_year - win + 1),
+                         np.exp((long["year"] - (last_year - win + 1)) / 1.5),
+                         1.0)
+
+    if (long["year"] == cfg.YTD_YEAR).any():
+        recency_w = np.where(long["year"] == cfg.YTD_YEAR, recency_w * 1.5, recency_w)
+
+    # Surge mask from recent share slopes
+    hist_table = annual.reindex(columns=cats_all)
+    hist_tot = hist_table.sum(axis=1).replace(0, np.nan)
+    hist_shares_all = (hist_table.T / hist_tot).T.fillna(0.0)
+
+    if hist_shares_all.shape[0] >= 2:
+        win2 = min(win, hist_shares_all.shape[0] - 1)
+        share_slope = (hist_shares_all.iloc[-1] - hist_shares_all.iloc[-win2 - 1]) / max(1, win2)
+    else:
+        share_slope = pd.Series(0.0, index=hist_shares_all.columns)
+
+    slope_thresh = np.quantile(share_slope, 0.75) if len(share_slope) > 0 else 0.0
+    surge_mask = (share_slope > slope_thresh) & (hist_shares_all.iloc[-1] > 0.05)
+
+    def boost_for(cat):
+        return cfg.CAT_BOOST_SURGE if surge_mask.get(cat, False) else 1.0
+
+    cat_w = long["cat"].map(lambda c: boost_for(c)).astype(float).values
+    w_cls_adj = long["count"].values * recency_w * cat_w
+
+    n_knots_shares = max(4, min(cfg.MAX_KNOTS_SHARES, np.unique(long["year"]).size))
+    X_share = _scale_years(long["year"].values, t_mean)
+    y_cls = long["cat"].values
+
+    share_model = make_pipeline(
+        SplineTransformer(n_knots=n_knots_shares, degree=3, extrapolation="linear"),
+        LogisticRegression(multi_class="multinomial", C=1.0, max_iter=5000, solver="lbfgs")
+    )
+    share_model.fit(X_share, y_cls, logisticregression__sample_weight=w_cls_adj)
+    cats = share_model.named_steps["logisticregression"].classes_
+    K = len(cats)
+
+    # Historical average shares for blending
+    avg_hist_share = hist_shares_all.reindex(columns=cats).mean(axis=0).values
+    avg_hist_share = np.maximum(avg_hist_share, 1e-12)
+    avg_hist_share /= avg_hist_share.sum()
+
+    # Momentum weights from positive recent share slopes
+    mom_raw = np.maximum(share_slope.reindex(cats).fillna(0.0).values, 0.0)
+    mom_w = np.full(K, 1.0 / K) if mom_raw.sum() == 0 else mom_raw / mom_raw.sum()
+
+    return dict(
+        total_model=total_model,
+        share_model=share_model,
+        cats=list(cats),
+        avg_hist_share=avg_hist_share,
+        mom_w=mom_w,
+        last_year=last_year,
+        t_mean=t_mean
+    )
+
+
+def _make_forecasts(models: Dict[str, Any],
+                    annual: pd.DataFrame,
+                    monthly: pd.DataFrame,
+                    cats_all: pd.Index,
+                    cfg: ForecastConfig) -> ForecastResult:
+
+    total_model = models["total_model"]
+    share_model = models["share_model"]
+    cats = models["cats"]
+    avg_hist_share = models["avg_hist_share"]
+    mom_w = models["mom_w"]
+    last_year = models["last_year"]
+    t_mean = models["t_mean"]
+
+    # Horizon
+    year_start = int(annual.index.min())
+    year_end = cfg.END_YEAR
+    years_fore = np.arange(year_start, year_end)
+    T = len(years_fore)
+    X_fore = _scale_years(years_fore, t_mean)
+
+    # Totals (isotonic increasing)
+    total_raw = total_model.predict(X_fore)
+    iso_total = IsotonicRegression(increasing=True, y_min=1e-8)
+    total_fore = iso_total.fit_transform(years_fore, total_raw)
+    for t in range(1, T):
+        if total_fore[t] <= total_fore[t - 1]:
+            total_fore[t] = total_fore[t - 1] + 1e-9
+
+    # Hard continuity: first forecast year > last observed/est year
+    y0 = int(last_year) + 1
+    annual_total = annual.sum(axis=1)
+    if (last_year in annual.index) and (y0 in years_fore):
+        last_actual_total = float(annual_total.loc[last_year])
+        idx0 = int(np.where(years_fore == y0)[0][0])
+        if total_fore[idx0] < last_actual_total + cfg.FIRST_YEAR_TOTAL_MIN_INC:
+            shift = (last_actual_total + cfg.FIRST_YEAR_TOTAL_MIN_INC) - total_fore[idx0]
+            total_fore[idx0:] = total_fore[idx0:] + shift
+
+    # Shares: model + blending (history/uniform) with surge shrink
+    proba = share_model.predict_proba(X_fore)
+    proba = np.maximum(proba, 1e-12)
+    proba = proba / proba.sum(axis=1, keepdims=True)
+
+    def _boost_for(cat, surge_mask=None):  # placeholder: already baked into fit via weights
+        return 1.0
+
+    shrink_vec = np.array([cfg.SHRINK_SURGE if _boost_for(c) > 1.0 else 1.0 for c in cats])
+    horizons = np.maximum(0, years_fore - last_year).astype(float)
+    w_fac = 1.0 - np.exp(-horizons / cfg.TAU_YEARS)
+    uniform_share = np.full(len(cats), 1.0 / len(cats))
+
+    proba_blend = np.empty_like(proba)
+    for t in range(T):
+        w_hist_t = cfg.W_HIST_MAX * w_fac[t] * shrink_vec
+        w_unif_t = cfg.W_UNIF_MAX * w_fac[t] * shrink_vec
+        w_model_t = 1.0 - (w_hist_t + w_unif_t)
+        w_model_t = np.clip(w_model_t, 0.0, None)
+        tw = w_model_t + w_hist_t + w_unif_t
+        tw = np.where(tw <= 0, 1.0, tw)
+        w_model_t /= tw; w_hist_t /= tw; w_unif_t /= tw
+        p = w_model_t * proba[t] + w_hist_t * avg_hist_share + w_unif_t * uniform_share
+        p = np.maximum(p, 1e-12)
+        proba_blend[t] = p / p.sum()
+
+    # Simulations for intervals
+    rng = np.random.default_rng(cfg.RANDOM_SEED)
+    SHARE_KAPPA = cfg.SHARE_KAPPA
+    GROWTH_NB_PHI = cfg.GROWTH_NB_PHI
+
+    def draw_overdispersed_poisson(mean_vec, phi):
+        if phi <= 0:
+            return rng.poisson(lam=mean_vec)
+        g = rng.gamma(shape=max(1e-6, 1.0 / phi), scale=phi, size=mean_vec.shape)
+        lam_tilde = mean_vec * g
+        return rng.poisson(lam=np.clip(lam_tilde, 1e-12, None))
+
+    T = len(years_fore)
+    K = len(cats)
+    cats_sim = np.empty((cfg.B_SIM, T, K), dtype=float)
+
+    growth_mean = np.empty(T)
+    growth_mean[0] = total_fore[0]
+    growth_mean[1:] = np.diff(total_fore)
+
+    for b in range(cfg.B_SIM):
+        growth_draws = draw_overdispersed_poisson(growth_mean, GROWTH_NB_PHI)
+        total_sim = np.cumsum(growth_draws).astype(float)
+        for t in range(1, T):
+            if total_sim[t] <= total_sim[t - 1]:
+                total_sim[t] = total_sim[t - 1] + 1e-9
+
+        # Dirichlet shares around blended probabilities
+        p_draw = np.empty((T, K), dtype=float)
+        for t in range(T):
+            alpha = np.maximum(1e-8, SHARE_KAPPA * proba_blend[t])
+            p_draw[t] = rng.dirichlet(alpha)
+
+        raw_guidance = total_sim[:, None] * p_draw
+        cats_sim[b] = allocate_growth(
+            total_sim,
+            raw_guidance,
+            floor_frac=cfg.GROWTH_FLOOR_FRAC,
+            min_abs=cfg.MIN_ABS_GROWTH,
+            mom_weights=None if horizons.max() == 0 else (mom_w),
+            mom_tilt_max=cfg.MOM_TILT_MAX,
+            mom_tau=cfg.MOM_TAU,
+            years=years_fore,
+            last_train=last_year
+        )
+
+    q_lo, q_hi, q_med = 0.05, 0.95, 0.50
+    lo_k = np.quantile(cats_sim, q_lo, axis=0)
+    hi_k = np.quantile(cats_sim, q_hi, axis=0)
+    med_k = np.quantile(cats_sim, q_med, axis=0)
+
+    fore_df = pd.DataFrame(med_k, index=years_fore, columns=cats)
+    fore_lo = pd.DataFrame(lo_k, index=years_fore, columns=cats)
+    fore_hi = pd.DataFrame(hi_k, index=years_fore, columns=cats)
+
+    # Coherent total from sims
+    tot_sim = cats_sim.sum(axis=2)
+    fore_total = pd.Series(np.quantile(tot_sim, q_med, axis=0), index=years_fore, name="Total")
+    fore_total_lo = pd.Series(np.quantile(tot_sim, q_lo, axis=0), index=years_fore)
+    fore_total_hi = pd.Series(np.quantile(tot_sim, q_hi, axis=0), index=years_fore)
+
+    # Strict continuity for categories at first forecast year
+    tiny = 1e-12
+    y0 = int(last_year) + 1
+    if (last_year in annual.index) and (y0 in fore_df.index):
+        prev_vec = annual.reindex(columns=cats).loc[last_year].values.astype(float)
+        cat_min_inc = np.where(prev_vec >= 1.0, cfg.FIRST_YEAR_CAT_MIN_INC, tiny)
+        base = prev_vec + cat_min_inc
+        need = base.sum()
+        if float(fore_total.loc[y0]) < need:
+            delta = need - float(fore_total.loc[y0])
+            idx0 = int(np.where(years_fore == y0)[0][0])
+            fore_total.loc[y0:] = fore_total.loc[y0:] + delta
+            fore_total_lo.loc[y0:] = fore_total_lo.loc[y0:] + delta
+            fore_total_hi.loc[y0:] = fore_total_hi.loc[y0:] + delta
+
+        Tt = float(fore_total.loc[y0])
+        rem = max(0.0, Tt - base.sum())
+        shares_y0 = proba_blend[int(np.where(years_fore == y0)[0][0])]
+        shares_y0 = shares_y0 / shares_y0.sum()
+        c0 = base + rem * shares_y0
+        fore_df.loc[y0] = c0
+
+        prev = c0
+        for yy in [yy for yy in fore_df.index if yy > y0]:
+            cc = np.maximum(fore_df.loc[yy].values.astype(float), prev + tiny)
+            Tt = float(fore_total.loc[yy])
+            S = cc.sum()
+            scale = 1.0 if S == 0 else (Tt / S)
+            cc = cc * scale
+            fore_df.loc[yy] = cc
+            prev = cc
+
+    # YTD labels for plotting
+    have_ytd = (monthly["year"] == cfg.YTD_YEAR).any()
+    last_month = None
+    ytd_actual_total = None
+    if have_ytd:
+        mset = monthly.loc[monthly["year"] == cfg.YTD_YEAR, "month"].unique().tolist()
+        if len(mset) > 0:
+            last_month = int(max(mset))
+            ytd_actual_total = monthly.loc[(monthly["year"] == cfg.YTD_YEAR) & (monthly["month"] <= last_month), cats_all].sum(axis=1).sum()
+
+    return ForecastResult(
+        fore_df=fore_df,
+        fore_lo=fore_lo,
+        fore_hi=fore_hi,
+        fore_total=fore_total,
+        fore_total_lo=fore_total_lo,
+        fore_total_hi=fore_total_hi,
+        actual_by_year_full=annual.reindex(columns=cats),
+        actual_by_ym=monthly.reindex(columns=list(cats) + ["year", "month"]),
+        cats=list(cats),
+        years_fore=years_fore,
+        last_year=last_year,
+        have_ytd=have_ytd,
+        last_month=last_month,
+        ytd_actual_total=float(ytd_actual_total) if ytd_actual_total is not None else None,
+        ytd_year=cfg.YTD_YEAR,
+        cat_col="",
+        date_col=""
+    )
+
+
+def forecast_by_category(df: pd.DataFrame,
+                         date_col: str,
+                         cat_col: str,
+                         config: ForecastConfig,
+                         weight_col: Optional[str] = None) -> ForecastResult:
+    """
+    One-call forecaster:
+        - builds annual/monthly actuals
+        - assimilates YTD (ratio-to-average with min cumulative share)
+        - fits total & share models
+        - simulates to produce median + 90% PI
+        - enforces continuity
+        - returns ForecastResult
+    """
+    built = _build_actuals(df, date_col=date_col, cat_col=cat_col, weight_col=weight_col, ytd_year=config.YTD_YEAR)
+    annual0 = built["annual"].copy()
+    monthly0 = built["monthly"].copy()
+    cats_all = built["cats_all"]
+
+    ann = annual0.copy()
+    mon = monthly0.copy()
+
+    _ytd = _annualize_ytd(ann, mon, cats_all, config)
+    annual = _ytd["annual"]
+    monthly = _ytd["monthly"]
+
+    models = _fit_totals_and_shares(annual, monthly, cats_all, config)
+    res = _make_forecasts(models, annual, monthly, cats_all, config)
+    # keep context labels
+    res.cat_col = cat_col
+    res.date_col = date_col
+    return res
+
+
+def apply_to_columns(df: pd.DataFrame,
+                     date_col: str,
+                     cat_cols: List[str],
+                     config: ForecastConfig,
+                     weight_col: Optional[str] = None) -> Dict[str, ForecastResult]:
+    """
+    Convenience: run the same forecasting pipeline over multiple categorical columns.
+    Returns a dict {cat_col -> ForecastResult}
+    """
+    out: Dict[str, ForecastResult] = {}
+    for c in cat_cols:
+        out[c] = forecast_by_category(df, date_col=date_col, cat_col=c, config=config, weight_col=weight_col)
+    return out
+
+
+# ----------------------
+# Plotting helpers
+# ----------------------
+
+def plot_total_panel(res: ForecastResult):
+    """
+    Single total panel with actuals, YTD marker, forecast median and 90% PI.
+    Creates one figure (no seaborn, no custom colors).
+    """
+    actual_total = res.actual_by_year_full.sum(axis=1)
+
+    plt.figure(figsize=(6.8, 4.4))
+    ax = plt.gca()
+    ax.scatter(actual_total.index, actual_total.values, s=18, label="Total actual (incl. YTD est)")
+
+    if res.ytd_actual_total is not None and res.have_ytd and res.last_month is not None:
+        ax.scatter([res.ytd_year], [res.ytd_actual_total], s=28, marker="x",
+                   label=f"{res.ytd_year} YTD actual (m≤{res.last_month})")
+
+    ax.fill_between(res.years_fore, res.fore_total_lo.values, res.fore_total_hi.values, alpha=0.25, label="90% PI")
+    ax.plot(res.fore_total.index, res.fore_total.values, "--", lw=2, label="Total forecast (median)")
+    ax.set_title(f"Total incidents ({res.cat_col}) with {res.ytd_year} YTD assimilation")
+    ax.set_xlabel("Year"); ax.set_ylabel("Count")
+    ax.legend(); ax.grid(True, lw=0.3, alpha=0.5)
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_category_panels(res: ForecastResult):
+    """
+    One subplot per category, shared y-lims, with actuals + forecast median + 90% PI.
+    Creates one figure (no seaborn, no custom colors).
+    """
+    cats = list(res.cats)
+    K = len(cats)
+
+    # y-lims across series
+    ymins, ymaxs = [], []
+    for c in cats:
+        series_list = [
+            res.fore_lo[c].values,
+            res.fore_hi[c].values,
+            res.fore_df[c].values,
+            res.actual_by_year_full[c].values,
+        ]
+        vals = np.concatenate([arr[~np.isnan(arr)] for arr in series_list if np.size(arr) > 0])
+        if vals.size > 0:
+            ymins.append(vals.min()); ymaxs.append(vals.max())
+    ymin = max(0.0, (min(ymins) if ymins else 0.0))
+    ymax = max(ymaxs) if ymaxs else (ymin + 1.0)
+    pad = 0.05 * (ymax - ymin if ymax > ymin else 1.0)
+    ymin_plot = max(0.0, ymin - pad); ymax_plot = ymax + pad
+
+    n_rows = K; n_cols = 1
+    plt.figure(figsize=(8.2, max(2.6 * n_rows, 3.8)))
+    for j, c in enumerate(cats):
+        ax = plt.subplot(n_rows, n_cols, j + 1)
+        ax.fill_between(res.years_fore, res.fore_lo[c].values, res.fore_hi[c].values, alpha=0.25, label="90% PI")
+        ax.plot(res.fore_df.index, res.fore_df[c].values, "--", lw=1.8, label="forecast (median)")
+        ax.scatter(res.actual_by_year_full.index, res.actual_by_year_full[c].values, s=12, alpha=0.95, label="actual/est")
+        if res.have_ytd and res.last_month is not None:
+            ytd_cat_val = res.actual_by_ym.loc[(res.actual_by_ym["year"] == res.ytd_year) & (res.actual_by_ym["month"] <= res.last_month), c].sum()
+            ax.scatter([res.ytd_year], [ytd_cat_val], s=20, marker="x")
+        ax.set_title(str(c)); ax.set_ylabel("Count"); ax.set_xlabel("Year" if j == n_rows - 1 else "")
+        ax.set_ylim(ymin_plot, ymax_plot); ax.grid(True, lw=0.3, alpha=0.5)
+        if j == 0: ax.legend(loc="upper left", fontsize=8)
+    plt.tight_layout()
+    plt.show()
+
+
+# ----------------------
+# Summary table helper
+# ----------------------
+
+def make_summary_table(res: ForecastResult,
+                       actual_years: List[int] = [2021, 2022, 2023, 2024]) -> pd.DataFrame:
+    """
+    Summary table with (by-category + total):
+      - Actual 2021-2024
+      - YTD + 2025 full-year estimate (if available)
+      - Predictions from year after last_year onward
+    Returns Int64-typed DataFrame rounded to integers.
+    """
+    last_year = res.last_year
+    years_fore = res.years_fore
+    cats = list(res.cats)
+
+    # Columns
+    cols: List[str] = [f"Actual_{y}" for y in actual_years]
+    if res.have_ytd and res.last_month is not None:
+        cols += [f"Actual_{res.ytd_year}_YTD_m\u2264{res.last_month}", f"Est_{res.ytd_year}_Full"]
+    else:
+        cols += [f"Actual_{res.ytd_year}"]
+
+    pred_start = last_year + 1
+    pred_cols = [f"Pred_{y}" for y in years_fore if y >= pred_start]
+    cols += pred_cols
+
+    summary_table = pd.DataFrame(index=cats + ["Total"], columns=cols, dtype=float)
+
+    # Fill historical actuals
+    for y in actual_years:
+        if y in res.actual_by_year_full.index:
+            summary_table.loc[cats, f"Actual_{y}"] = res.actual_by_year_full.reindex(columns=cats).loc[y].values
+            summary_table.loc["Total", f"Actual_{y}"] = res.actual_by_year_full.loc[y].sum()
+
+    # 2025 YTD + est full-year
+    if res.have_ytd and res.last_month is not None:
+        ytd_cats = res.actual_by_ym.loc[(res.actual_by_ym["year"] == res.ytd_year) & (res.actual_by_ym["month"] <= res.last_month), cats].sum()
+        summary_table.loc[cats, f"Actual_{res.ytd_year}_YTD_m\u2264{res.last_month}"] = ytd_cats.values
+        summary_table.loc["Total", f"Actual_{res.ytd_year}_YTD_m\u2264{res.last_month}"] = ytd_cats.sum()
+
+        # The annual table already contains the 2025 full-year estimate
+        if res.ytd_year in res.actual_by_year_full.index:
+            summary_table.loc[cats, f"Est_{res.ytd_year}_Full"] = res.actual_by_year_full.reindex(columns=cats).loc[res.ytd_year].values
+            summary_table.loc["Total", f"Est_{res.ytd_year}_Full"] = res.actual_by_year_full.loc[res.ytd_year].sum()
+    else:
+        if res.ytd_year in res.actual_by_year_full.index:
+            summary_table.loc[cats, f"Actual_{res.ytd_year}"] = res.actual_by_year_full.reindex(columns=cats).loc[res.ytd_year].values
+            summary_table.loc["Total", f"Actual_{res.ytd_year}"] = res.actual_by_year_full.loc[res.ytd_year].sum()
+
+    # Predictions
+    for y in years_fore:
+        if y >= (last_year + 1):
+            col = f"Pred_{y}"
+            if y in res.fore_df.index:
+                summary_table.loc[cats, col] = res.fore_df.loc[y].values
+            if y in res.fore_total.index:
+                summary_table.loc["Total", col] = float(res.fore_total.loc[y])
+
+    summary_table = summary_table.astype(float).round(0).astype("Int64")
+    return summary_table
