@@ -820,3 +820,215 @@ def make_summary_table(res: ForecastResult,
 
     summary_table = summary_table.astype(float).round(0).astype("Int64")
     return summary_table
+
+def plot_category_panels_exploded(
+    res: ForecastResult,
+    top_k: int | None = None,
+    explode_for_plot: bool = False,
+    explode_col: str = "Alleged harmed or nearly harmed parties",
+    raw_df: "pd.DataFrame | None" = None,
+    list_sep: str = ";",
+    date_col: str | None = "date",   # NEW: derive year/month from here if needed
+):
+    """
+    One subplot per category (optionally only the top_k), shared y-lims,
+    with actuals + forecast median + 90% PI. Creates one figure.
+
+    If `explode_for_plot` is True, uses `raw_df` (or `res.events_df`) to:
+      - parse + explode `explode_col`
+      - apply fractional weights (1/len(labels)) so totals are normalized
+      - rebuild yearly actuals (and YTD from monthly if available)
+      - forecasts are shown only if available for those categories.
+
+    Ranking for top_k:
+      - Uses the latest available forecast median for each category.
+      - Falls back to last available actual if forecast is missing.
+    """
+    import numpy as np
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    import json, ast
+
+    # ---------------- helpers ----------------
+    def _to_list(x: object) -> list[str]:
+        if pd.isna(x):
+            return []
+        if isinstance(x, list):
+            return [str(i).strip().strip('"').strip("'") for i in x if str(i).strip()]
+        if not isinstance(x, str):
+            s = str(x).strip()
+            return [s] if s else []
+        s = x.strip()
+        if not s or s.lower() == "nan":
+            return []
+        if s.startswith("[") and s.endswith("]"):
+            for loader in (json.loads, ast.literal_eval):
+                try:
+                    val = loader(s)
+                    if isinstance(val, list):
+                        return [str(i).strip().strip('"').strip("'") for i in val if str(i).strip()]
+                except Exception:
+                    pass
+            inner = s[1:-1]
+            parts = [p.strip().strip('"').strip("'") for p in inner.split(",")]
+            return [p for p in parts if p]
+        if list_sep in s:
+            parts = [t.strip() for t in s.split(list_sep)]
+            return [p for p in parts if p]
+        return [s]
+
+    # ------------- choose data sources --------------
+    cats_all   = list(res.cats)
+    fore_df    = res.fore_df
+    fore_lo    = res.fore_lo
+    fore_hi    = res.fore_hi
+    act_year   = res.actual_by_year_full
+    act_ym     = getattr(res, "actual_by_ym", None)  # optional
+    have_ytd   = getattr(res, "have_ytd", False)
+    last_month = getattr(res, "last_month", None)
+    ytd_year   = getattr(res, "ytd_year", None)
+    years_fore = getattr(res, "years_fore", getattr(fore_df, "index", None))
+
+    # If requested, rebuild actuals by exploding + fractional weighting
+    if explode_for_plot:
+        events_df = raw_df if raw_df is not None else getattr(res, "events_df", None)
+        if events_df is None:
+            raise ValueError(
+                "explode_for_plot=True requires `raw_df` (or `res.events_df`)."
+            )
+
+        # id column
+        if "incident_id" in events_df.columns:
+            id_col = "incident_id"
+        elif "id" in events_df.columns:
+            id_col = "id"
+        else:
+            events_df = events_df.reset_index().rename(columns={"index": "_row_id"})
+            id_col = "_row_id"
+
+        # ensure year/month exist (derive from date_col if needed)
+        needs_year = "year" not in events_df.columns
+        needs_month = "month" not in events_df.columns
+        if (needs_year or needs_month):
+            if date_col is None or date_col not in events_df.columns:
+                raise ValueError(
+                    "`raw_df`/`events_df` must include 'year' (and optionally 'month') "
+                    "or provide `date_col` so these can be derived."
+                )
+            dt = pd.to_datetime(events_df[date_col], errors="coerce")
+            events_df = events_df.assign(year=dt.dt.year if needs_year else events_df.get("year"),
+                                         month=dt.dt.month if needs_month else events_df.get("month"))
+            events_df = events_df.dropna(subset=["year"])  # rows with invalid dates
+
+        # parse lists + compute fractional weights
+        cols_needed = [id_col, "year", explode_col]
+        if "month" in events_df.columns:
+            cols_needed.insert(2, "month")
+        tmp = events_df[cols_needed].copy()
+
+        tmp["_labels"] = tmp[explode_col].apply(_to_list)
+        tmp["_k"] = tmp["_labels"].apply(lambda L: len(L))
+        tmp = tmp[tmp["_k"] > 0].copy()
+        tmp["_w"] = 1.0 / tmp["_k"]
+
+        # explode to one label per row with fractional weight
+        tmp = tmp.explode("_labels").rename(columns={"_labels": "label"}).drop(columns=[explode_col])
+
+        # yearly totals per label (sum fractional weights)
+        by_year = tmp.groupby(["year", "label"], as_index=False)["_w"].sum()
+        act_year = by_year.pivot(index="year", columns="label", values="_w").fillna(0.0).sort_index()
+
+        # monthly (if available)
+        act_ym = None
+        if "month" in tmp.columns:
+            by_ym = tmp.groupby(["year", "month", "label"], as_index=False)["_w"].sum()
+            act_ym = by_ym.pivot_table(
+                index=["year", "month"], columns="label", values="_w", aggfunc="sum", fill_value=0.0
+            ).sort_index()
+
+        # columns/categories now come from exploded actuals
+        cats_all = list(act_year.columns)
+
+    # ---------------- top-k selection ----------------
+    if top_k is not None and top_k < len(cats_all):
+        last_fore_year = int(fore_df.index.max()) if getattr(fore_df, "index", None) is not None and len(fore_df.index) else None
+        scores = {}
+        for c in cats_all:
+            val = None
+            if last_fore_year is not None and c in getattr(fore_df, "columns", []):
+                v = fore_df.loc[last_fore_year, c]
+                val = float(v) if np.isfinite(v) else None
+            if val is None:
+                if c in act_year.columns:
+                    last_idx = act_year.index.max()
+                    v2 = act_year.loc[last_idx, c]
+                    val = float(v2) if np.isfinite(v2) else float(act_year[c].sum())
+                else:
+                    val = 0.0
+            scores[c] = val
+        cats = [c for c, _ in sorted(scores.items(), key=lambda kv: kv[1], reverse=True)[:top_k]]
+    else:
+        cats = cats_all
+
+    K = len(cats)
+
+    # ------------- y-limits across selected series -------------
+    def _vals_for_cat(c: str):
+        arrs = []
+        if fore_lo is not None and c in getattr(fore_lo, "columns", []): arrs.append(fore_lo[c].values)
+        if fore_hi is not None and c in getattr(fore_hi, "columns", []): arrs.append(fore_hi[c].values)
+        if fore_df is not None and c in getattr(fore_df, "columns", []): arrs.append(fore_df[c].values)
+        if act_year is not None and c in getattr(act_year, "columns", []): arrs.append(act_year[c].values)
+        if not arrs: return np.array([])
+        return np.concatenate([a[~np.isnan(a)] for a in arrs if np.size(a) > 0])
+
+    ymins, ymaxs = [], []
+    for c in cats:
+        vals = _vals_for_cat(c)
+        if vals.size > 0:
+            ymins.append(vals.min()); ymaxs.append(vals.max())
+    ymin = max(0.0, (min(ymins) if ymins else 0.0))
+    ymax = max(ymaxs) if ymaxs else (ymin + 1.0)
+    pad = 0.05 * (ymax - ymin if ymax > ymin else 1.0)
+    ymin_plot = max(0.0, ymin - pad); ymax_plot = ymax + pad
+
+    # ------------- plotting -------------
+    if years_fore is None and fore_df is not None:
+        years_fore = fore_df.index
+
+    n_rows = K; n_cols = 1
+    plt.figure(figsize=(8.2, max(2.6 * n_rows, 3.8)))
+    for j, c in enumerate(cats):
+        ax = plt.subplot(n_rows, n_cols, j + 1)
+
+        if fore_lo is not None and fore_hi is not None and c in getattr(fore_lo, "columns", []) and c in getattr(fore_hi, "columns", []):
+            ax.fill_between(years_fore, fore_lo[c].values, fore_hi[c].values, alpha=0.25, label="90% PI")
+        if fore_df is not None and c in getattr(fore_df, "columns", []):
+            ax.plot(fore_df.index, fore_df[c].values, "--", lw=1.8, label="forecast (median)")
+        if act_year is not None and c in getattr(act_year, "columns", []):
+            ax.scatter(act_year.index, act_year[c].values, s=12, alpha=0.95, label="actual/est")
+
+        # YTD marker from exploded monthly if available
+        if act_ym is not None and have_ytd and last_month is not None and ytd_year is not None and c in act_ym.columns:
+            ytd_val = None
+            try:
+                # MultiIndex (year, month) expected
+                ytd_val = act_ym.loc[(ytd_year, slice(1, last_month)), c].sum()
+            except Exception:
+                # robust fallback
+                ymd = act_ym.reset_index()
+                mask = (ymd.get("year") == ytd_year) & (ymd.get("month") <= last_month)
+                ytd_val = float(ymd.loc[mask, c].sum())
+            if ytd_val is not None and np.isfinite(ytd_val):
+                ax.scatter([ytd_year], [ytd_val], s=20, marker="x")
+
+        subtitle = f"{str(c)}" + (" (exploded, fractional)" if explode_for_plot else "")
+        ax.set_title(subtitle)
+        ax.set_ylabel("Count"); ax.set_xlabel("Year" if j == n_rows - 1 else "")
+        ax.set_ylim(ymin_plot, ymax_plot); ax.grid(True, lw=0.3, alpha=0.5)
+        if j == 0:
+            base_title = f"Top {K} of {len(list(res.cats))}" if (top_k is not None) else None
+            ax.legend(loc="upper left", fontsize=8, title=base_title if base_title else None)
+
+    plt.tight_layout()
+    plt.show()
