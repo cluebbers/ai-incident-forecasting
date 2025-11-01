@@ -1,0 +1,870 @@
+Namespace,Incident ID,Published,Risk Domain,Risk Subdomain,Entity,Timing,Intent
+MIT,1,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,2,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,3,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,4,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,5,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,6,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,7,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,8,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,9,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Intentional
+MIT,10,True,5. Human-Computer Interaction,5.2. Loss of human agency and autonomy,AI,Post-deployment,Unintentional
+MIT,11,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,12,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,13,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,14,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,15,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Unintentional
+MIT,16,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,17,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,18,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,19,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,20,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,21,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Pre-deployment,Unintentional
+MIT,22,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,23,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Unintentional
+MIT,24,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Unintentional
+MIT,25,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,26,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,Human,Post-deployment,Intentional
+MIT,27,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Unintentional
+MIT,28,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Intentional
+MIT,29,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Pre-deployment,Unintentional
+MIT,30,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Unintentional
+MIT,31,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Pre-deployment,Unintentional
+MIT,32,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,AI,Post-deployment,Unintentional
+MIT,33,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,34,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,AI,Post-deployment,Unintentional
+MIT,35,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,36,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,37,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,38,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,39,True,3. Misinformation,3.1. False or misleading information,Human,Pre-deployment,Intentional
+MIT,40,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,41,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Pre-deployment,Intentional
+MIT,42,True,5. Human-Computer Interaction,5.2. Loss of human agency and autonomy,Human,Pre-deployment,Intentional
+MIT,43,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,44,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,AI,Post-deployment,Unintentional
+MIT,45,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,46,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,47,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,48,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,49,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,50,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,Human,Post-deployment,Intentional
+MIT,51,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,52,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Unintentional
+MIT,53,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,54,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,55,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,56,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,57,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Intentional
+MIT,58,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,59,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,60,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,61,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,62,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Pre-deployment,Unintentional
+MIT,63,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,64,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,65,True,"7. AI system safety, failures, and limitations",7.1. AI pursuing its own goals in conflict with human goals or values,AI,Post-deployment,Unintentional
+MIT,66,True,"7. AI system safety, failures, and limitations",7.1. AI pursuing its own goals in conflict with human goals or values,AI,Post-deployment,Unintentional
+MIT,67,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,68,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,69,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,70,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Pre-deployment,Unintentional
+MIT,71,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,72,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,73,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,74,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,75,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,76,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Unintentional
+MIT,77,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,78,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,79,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,Human,Post-deployment,Unintentional
+MIT,80,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,81,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,Human,Pre-deployment,Unintentional
+MIT,82,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,83,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,84,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,85,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Pre-deployment,Unintentional
+MIT,86,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,87,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,88,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,Human,Post-deployment,Intentional
+MIT,89,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,91,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,92,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,93,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,94,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,95,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Intentional
+MIT,96,True,"7. AI system safety, failures, and limitations",7.4. Lack of transparency or interpretability,AI,Post-deployment,Unintentional
+MIT,97,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,98,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Unintentional
+MIT,99,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,100,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,101,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Other,Post-deployment,Unintentional
+MIT,102,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,103,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,104,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,105,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,106,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,107,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Pre-deployment,Intentional
+MIT,108,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,109,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,110,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,111,True,5. Human-Computer Interaction,5.2. Loss of human agency and autonomy,AI,Post-deployment,Intentional
+MIT,112,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,113,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,114,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,115,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,116,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,117,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,118,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,119,True,5. Human-Computer Interaction,5.2. Loss of human agency and autonomy,Human,Post-deployment,Intentional
+MIT,120,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,AI,Post-deployment,Unintentional
+MIT,121,True,4. Malicious Actors & Misuse,"4.2. Cyberattacks, weapon development or use, and mass harm",AI,Post-deployment,Intentional
+MIT,122,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",AI,Post-deployment,Unintentional
+MIT,123,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,124,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,125,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,126,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,127,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,128,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,129,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,131,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,132,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,133,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,134,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,135,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,136,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,137,True,"7. AI system safety, failures, and limitations",7.4. Lack of transparency or interpretability,AI,Post-deployment,Intentional
+MIT,138,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,139,True,3. Misinformation,3.2. Pollution of information ecosystem and loss of consensus reality,AI,Post-deployment,Unintentional
+MIT,140,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,141,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Intentional
+MIT,142,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,143,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,144,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,145,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,146,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,147,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,148,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,149,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,150,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,151,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,152,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,153,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,154,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,155,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,156,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,157,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Unintentional
+MIT,158,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,159,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Pre-deployment,Unintentional
+MIT,160,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,161,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,162,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Intentional
+MIT,163,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,Human,Post-deployment,Intentional
+MIT,164,True,3. Misinformation,3.2. Pollution of information ecosystem and loss of consensus reality,AI,Post-deployment,Unintentional
+MIT,165,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,166,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,167,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,168,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,169,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,170,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",AI,Post-deployment,Intentional
+MIT,171,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,172,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,173,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Unintentional
+MIT,174,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,175,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,176,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,177,True,5. Human-Computer Interaction,5.2. Loss of human agency and autonomy,AI,Post-deployment,Intentional
+MIT,178,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,179,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Intentional
+MIT,180,True,5. Human-Computer Interaction,5.2. Loss of human agency and autonomy,Human,Post-deployment,Intentional
+MIT,181,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Unintentional
+MIT,182,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Unintentional
+MIT,183,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Intentional
+MIT,184,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Pre-deployment,Intentional
+MIT,185,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,186,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,187,True,6. Socioeconomic & Environmental Harms,6.5. Governance failure,Human,Post-deployment,Intentional
+MIT,188,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,189,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,190,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,191,True,6. Socioeconomic & Environmental Harms,6.1. Power centralization and unfair distribution of benefits,Human,Post-deployment,Intentional
+MIT,192,True,5. Human-Computer Interaction,5.2. Loss of human agency and autonomy,AI,Post-deployment,Unintentional
+MIT,193,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,Human,Post-deployment,Unintentional
+MIT,194,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,195,True,5. Human-Computer Interaction,5.2. Loss of human agency and autonomy,Human,Post-deployment,Intentional
+MIT,196,True,5. Human-Computer Interaction,5.2. Loss of human agency and autonomy,Human,Post-deployment,Intentional
+MIT,197,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,198,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,199,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,200,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,201,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,202,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,203,True,"7. AI system safety, failures, and limitations",7.4. Lack of transparency or interpretability,AI,Post-deployment,Intentional
+MIT,204,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,205,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,206,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Intentional
+MIT,207,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,208,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,209,True,"7. AI system safety, failures, and limitations",7.1. AI pursuing its own goals in conflict with human goals or values,AI,Post-deployment,Intentional
+MIT,210,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,211,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,212,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,213,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,214,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,215,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Intentional
+MIT,216,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,217,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,218,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,219,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,220,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,221,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,222,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,223,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,Human,Post-deployment,Intentional
+MIT,224,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,Human,Post-deployment,Intentional
+MIT,225,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,226,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,227,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,228,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,229,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,230,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,231,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,232,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,233,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,234,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,235,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,236,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,238,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,239,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,240,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,241,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,242,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,243,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",AI,Post-deployment,Intentional
+MIT,244,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,245,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,246,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,248,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,249,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,250,True,"7. AI system safety, failures, and limitations",7.4. Lack of transparency or interpretability,Human,Post-deployment,Intentional
+MIT,251,True,6. Socioeconomic & Environmental Harms,6.1. Power centralization and unfair distribution of benefits,Human,Post-deployment,Intentional
+MIT,252,True,"7. AI system safety, failures, and limitations",7.2. AI possessing dangerous capabilities,Human,Pre-deployment,Intentional
+MIT,253,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,254,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",AI,Post-deployment,Unintentional
+MIT,255,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,256,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,257,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,258,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,259,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,Human,Post-deployment,Intentional
+MIT,260,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,261,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,262,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,263,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,264,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Unintentional
+MIT,265,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,266,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,267,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,268,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,270,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,271,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,272,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Intentional
+MIT,273,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,274,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Other,Post-deployment,Unintentional
+MIT,275,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,276,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Pre-deployment,Intentional
+MIT,277,True,6. Socioeconomic & Environmental Harms,6.3. Economic and cultural devaluation of human effort,Human,Post-deployment,Intentional
+MIT,278,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,279,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,280,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,281,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,282,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,283,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,284,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Intentional
+MIT,285,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,286,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,287,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Pre-deployment,Unintentional
+MIT,288,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,289,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,290,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,291,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,292,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Pre-deployment,Unintentional
+MIT,293,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,294,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,AI,Post-deployment,Unintentional
+MIT,295,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Unintentional
+MIT,296,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,297,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,298,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Pre-deployment,Unintentional
+MIT,299,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,300,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,301,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,302,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,303,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,304,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,305,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,306,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,307,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,308,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,309,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,310,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,311,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,312,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,313,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,314,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Unintentional
+MIT,315,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,316,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,317,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,318,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Unintentional
+MIT,319,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,320,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Unintentional
+MIT,321,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,322,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Unintentional
+MIT,323,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,324,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,325,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,326,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,AI,Post-deployment,Unintentional
+MIT,327,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,AI,Post-deployment,Unintentional
+MIT,328,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,329,True,4. Malicious Actors & Misuse,"4.2. Cyberattacks, weapon development or use, and mass harm",AI,Post-deployment,Unintentional
+MIT,330,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,331,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,332,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,333,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,334,True,"7. AI system safety, failures, and limitations",7.1. AI pursuing its own goals in conflict with human goals or values,AI,Post-deployment,Intentional
+MIT,335,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Intentional
+MIT,336,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Intentional
+MIT,337,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,339,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,340,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,341,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,343,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,344,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,345,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,346,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,347,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,348,True,3. Misinformation,3.2. Pollution of information ecosystem and loss of consensus reality,AI,Post-deployment,Unintentional
+MIT,349,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,350,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,351,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,352,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,Human,Post-deployment,Intentional
+MIT,353,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,354,True,"7. AI system safety, failures, and limitations",7.4. Lack of transparency or interpretability,Human,Post-deployment,Intentional
+MIT,355,True,"7. AI system safety, failures, and limitations",7.4. Lack of transparency or interpretability,AI,Post-deployment,Intentional
+MIT,356,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,357,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",AI,Post-deployment,Unintentional
+MIT,358,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,359,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,360,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,361,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",AI,Post-deployment,Unintentional
+MIT,362,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,363,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,364,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,366,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,Human,Post-deployment,Intentional
+MIT,367,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,368,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,369,True,6. Socioeconomic & Environmental Harms,6.3. Economic and cultural devaluation of human effort,Human,Post-deployment,Intentional
+MIT,370,True,6. Socioeconomic & Environmental Harms,6.1. Power centralization and unfair distribution of benefits,AI,Post-deployment,Intentional
+MIT,371,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,372,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,AI,Post-deployment,Unintentional
+MIT,373,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,374,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,375,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,376,True,6. Socioeconomic & Environmental Harms,6.1. Power centralization and unfair distribution of benefits,AI,Post-deployment,Intentional
+MIT,377,True,5. Human-Computer Interaction,5.2. Loss of human agency and autonomy,Human,Post-deployment,Intentional
+MIT,378,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,379,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Unintentional
+MIT,380,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,381,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,382,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,383,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,384,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,385,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,386,True,5. Human-Computer Interaction,5.2. Loss of human agency and autonomy,AI,Post-deployment,Intentional
+MIT,387,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,388,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,389,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,390,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,391,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,392,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,393,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,394,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,395,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,396,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,397,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,398,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,399,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,400,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,401,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,402,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,403,True,5. Human-Computer Interaction,5.2. Loss of human agency and autonomy,AI,Post-deployment,Unintentional
+MIT,404,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,405,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,406,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",AI,Post-deployment,Unintentional
+MIT,407,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,408,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",AI,Post-deployment,Unintentional
+MIT,409,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Pre-deployment,Intentional
+MIT,410,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,411,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,412,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Unintentional
+MIT,413,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Unintentional
+MIT,414,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,415,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,416,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,417,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,418,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,419,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,420,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,421,True,6. Socioeconomic & Environmental Harms,6.3. Economic and cultural devaluation of human effort,AI,Post-deployment,Intentional
+MIT,422,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,423,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,424,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,425,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,426,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,427,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,428,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,Human,Post-deployment,Intentional
+MIT,429,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,430,True,5. Human-Computer Interaction,5.2. Loss of human agency and autonomy,Human,Post-deployment,Intentional
+MIT,431,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,432,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,433,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,434,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,435,True,6. Socioeconomic & Environmental Harms,6.1. Power centralization and unfair distribution of benefits,Human,Post-deployment,Intentional
+MIT,436,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,437,True,6. Socioeconomic & Environmental Harms,6.1. Power centralization and unfair distribution of benefits,Human,Post-deployment,Intentional
+MIT,438,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Pre-deployment,Intentional
+MIT,439,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,440,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,Human,Post-deployment,Unintentional
+MIT,441,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,443,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,444,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,445,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,446,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,447,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Unintentional
+MIT,448,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,449,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,450,True,6. Socioeconomic & Environmental Harms,6.2. Increased inequality and decline in employment quality,Human,Pre-deployment,Intentional
+MIT,451,True,6. Socioeconomic & Environmental Harms,6.3. Economic and cultural devaluation of human effort,AI,Post-deployment,Intentional
+MIT,452,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Intentional
+MIT,453,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,454,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,455,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,456,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,457,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,458,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,459,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,460,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,461,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,462,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,463,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,464,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,465,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Pre-deployment,Unintentional
+MIT,466,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,467,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,468,True,"7. AI system safety, failures, and limitations",7.1. AI pursuing its own goals in conflict with human goals or values,AI,Post-deployment,Unintentional
+MIT,469,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,470,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,471,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,472,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,473,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,Human,Post-deployment,Intentional
+MIT,474,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,475,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,476,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",AI,Post-deployment,Unintentional
+MIT,477,True,"7. AI system safety, failures, and limitations",7.1. AI pursuing its own goals in conflict with human goals or values,AI,Post-deployment,Unintentional
+MIT,478,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,479,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,Human,Post-deployment,Intentional
+MIT,480,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,Human,Post-deployment,Intentional
+MIT,481,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,482,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,483,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,484,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,485,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,Human,Post-deployment,Intentional
+MIT,486,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,487,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,488,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,489,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,490,True,6. Socioeconomic & Environmental Harms,6.3. Economic and cultural devaluation of human effort,Human,Post-deployment,Intentional
+MIT,491,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,AI,Post-deployment,Unintentional
+MIT,492,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,493,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,494,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,495,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,496,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,497,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,498,True,"7. AI system safety, failures, and limitations",7.1. AI pursuing its own goals in conflict with human goals or values,AI,Post-deployment,Intentional
+MIT,499,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,500,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,501,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Intentional
+MIT,502,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,503,True,"7. AI system safety, failures, and limitations",7.1. AI pursuing its own goals in conflict with human goals or values,AI,Post-deployment,Unintentional
+MIT,504,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,505,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,AI,Post-deployment,Unintentional
+MIT,506,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,507,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,508,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,509,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,510,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,511,True,"7. AI system safety, failures, and limitations",7.1. AI pursuing its own goals in conflict with human goals or values,AI,Post-deployment,Unintentional
+MIT,513,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",AI,Post-deployment,Unintentional
+MIT,514,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,515,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,516,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",AI,Post-deployment,Unintentional
+MIT,517,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,518,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Intentional
+MIT,519,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,520,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Other,Post-deployment,Unintentional
+MIT,521,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Unintentional
+MIT,522,True,3. Misinformation,3.2. Pollution of information ecosystem and loss of consensus reality,AI,Post-deployment,Unintentional
+MIT,523,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,AI,Post-deployment,Unintentional
+MIT,524,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,525,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Unintentional
+MIT,526,True,6. Socioeconomic & Environmental Harms,6.3. Economic and cultural devaluation of human effort,Human,Post-deployment,Intentional
+MIT,527,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Intentional
+MIT,528,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,529,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,530,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,531,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,532,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,533,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,534,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,535,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Pre-deployment,Unintentional
+MIT,536,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Pre-deployment,Unintentional
+MIT,537,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,538,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,539,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,540,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,541,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Unintentional
+MIT,543,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,544,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,545,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,546,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,547,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,548,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,549,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,AI,Post-deployment,Unintentional
+MIT,550,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,551,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,552,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,AI,Post-deployment,Unintentional
+MIT,553,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,554,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,555,True,6. Socioeconomic & Environmental Harms,6.3. Economic and cultural devaluation of human effort,AI,Pre-deployment,Intentional
+MIT,556,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,557,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,558,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,559,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,560,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,561,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Pre-deployment,Intentional
+MIT,562,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,563,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,564,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,565,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,566,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,567,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,Human,Post-deployment,Intentional
+MIT,568,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,569,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,AI,Post-deployment,Unintentional
+MIT,570,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,571,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Unintentional
+MIT,572,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,573,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,574,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,575,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,576,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,Human,Post-deployment,Intentional
+MIT,577,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,578,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,Human,Post-deployment,Intentional
+MIT,579,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,580,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,581,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,582,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,583,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,584,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",AI,Post-deployment,Intentional
+MIT,585,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,586,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,587,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,588,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Unintentional
+MIT,589,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,590,True,6. Socioeconomic & Environmental Harms,6.3. Economic and cultural devaluation of human effort,Human,Post-deployment,Intentional
+MIT,591,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Intentional
+MIT,592,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,593,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,594,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,595,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,596,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,597,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,598,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Unintentional
+MIT,599,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,600,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,601,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,602,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,603,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Intentional
+MIT,604,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,605,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,606,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,607,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,608,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Intentional
+MIT,609,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,610,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,611,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,612,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,613,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Unintentional
+MIT,614,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Unintentional
+MIT,615,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Unintentional
+MIT,616,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,617,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,618,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,619,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Intentional
+MIT,620,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,621,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,622,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,623,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,624,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Pre-deployment,Unintentional
+MIT,625,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Unintentional
+MIT,626,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,627,True,6. Socioeconomic & Environmental Harms,6.3. Economic and cultural devaluation of human effort,Human,Post-deployment,Intentional
+MIT,628,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,629,True,6. Socioeconomic & Environmental Harms,6.3. Economic and cultural devaluation of human effort,AI,Post-deployment,Intentional
+MIT,630,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,AI,Post-deployment,Unintentional
+MIT,631,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,632,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,Human,Post-deployment,Intentional
+MIT,633,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Unintentional
+MIT,634,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,635,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,636,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,637,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,638,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Other,Post-deployment,Unintentional
+MIT,639,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,640,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,641,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,642,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,643,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,644,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,645,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,646,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",AI,Post-deployment,Unintentional
+MIT,647,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,648,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,649,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,650,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,651,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,652,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,653,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,654,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,655,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,656,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,657,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,658,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,659,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,660,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,661,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,662,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,663,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,664,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,665,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Unintentional
+MIT,666,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,667,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,668,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,669,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,670,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,671,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,672,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Intentional
+MIT,673,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,674,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,675,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,676,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,677,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,678,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,679,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,680,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,681,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,682,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,683,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,684,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Unintentional
+MIT,685,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,686,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,687,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,688,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,689,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,690,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,691,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,692,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,693,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,694,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,695,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,696,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,697,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,698,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,699,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,Human,Post-deployment,Unintentional
+MIT,700,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,AI,Post-deployment,Unintentional
+MIT,701,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,702,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,703,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Intentional
+MIT,704,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,705,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,706,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,707,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,708,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,709,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,710,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,711,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,712,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,713,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,714,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,715,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,716,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Intentional
+MIT,717,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,718,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Pre-deployment,Intentional
+MIT,719,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,720,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,721,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",AI,Post-deployment,Intentional
+MIT,722,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,AI,Post-deployment,Unintentional
+MIT,723,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,724,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,725,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,726,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,727,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,728,True,6. Socioeconomic & Environmental Harms,6.3. Economic and cultural devaluation of human effort,Human,Post-deployment,Intentional
+MIT,729,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Pre-deployment,Unintentional
+MIT,730,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,731,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,AI,Post-deployment,Unintentional
+MIT,732,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,733,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,734,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,735,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,736,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,737,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,738,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,739,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,740,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,741,True,6. Socioeconomic & Environmental Harms,6.3. Economic and cultural devaluation of human effort,Human,Post-deployment,Intentional
+MIT,742,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,743,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",AI,Post-deployment,Unintentional
+MIT,744,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,745,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,746,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,747,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,748,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,749,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,750,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,751,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,752,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Intentional
+MIT,753,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,754,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,755,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,756,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,757,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,Human,Post-deployment,Unintentional
+MIT,758,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,759,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,760,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,761,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,762,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,Human,Post-deployment,Intentional
+MIT,763,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,764,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,765,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,766,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,767,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,768,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Unintentional
+MIT,769,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,770,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,771,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,772,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,773,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",AI,Post-deployment,Unintentional
+MIT,774,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,775,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,776,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,777,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,778,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,779,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,780,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,781,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,782,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,783,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",AI,Post-deployment,Intentional
+MIT,784,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,785,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,786,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,787,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,788,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,789,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,790,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,Human,Post-deployment,Unintentional
+MIT,791,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,792,True,6. Socioeconomic & Environmental Harms,6.3. Economic and cultural devaluation of human effort,Human,Post-deployment,Intentional
+MIT,793,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,794,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,795,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,796,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,797,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,798,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,799,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,800,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,801,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,802,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,803,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Intentional
+MIT,804,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,805,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,806,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,807,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",Human,Post-deployment,Intentional
+MIT,808,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,809,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,810,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,811,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",AI,Post-deployment,Unintentional
+MIT,812,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,813,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,814,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Unintentional
+MIT,815,True,"7. AI system safety, failures, and limitations",7.4. Lack of transparency or interpretability,Human,Post-deployment,Intentional
+MIT,816,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,Human,Post-deployment,Unintentional
+MIT,817,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,818,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,819,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,820,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,821,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,822,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Intentional
+MIT,823,True,"7. AI system safety, failures, and limitations",7.4. Lack of transparency or interpretability,Human,Post-deployment,Intentional
+MIT,824,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,825,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,826,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,AI,Post-deployment,Unintentional
+MIT,827,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,828,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,829,True,2. Privacy & Security,"2.1. Compromise of privacy by obtaining, leaking or correctly inferring sensitive information",AI,Post-deployment,Unintentional
+MIT,830,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,831,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,832,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",AI,Post-deployment,Intentional
+MIT,833,True,6. Socioeconomic & Environmental Harms,6.2. Increased inequality and decline in employment quality,Human,Post-deployment,Intentional
+MIT,834,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,835,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,836,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,837,True,3. Misinformation,3.1. False or misleading information,Human,Pre-deployment,Intentional
+MIT,838,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,839,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,840,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,841,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,842,True,2. Privacy & Security,2.2. AI system security vulnerabilities and attacks,Human,Post-deployment,Intentional
+MIT,843,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,Human,Post-deployment,Intentional
+MIT,844,True,1. Discrimination and Toxicity,1.1. Unfair discrimination and misrepresentation,AI,Post-deployment,Unintentional
+MIT,845,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,846,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,847,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Pre-deployment,Unintentional
+MIT,848,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,849,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,850,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,Human,Post-deployment,Intentional
+MIT,851,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,852,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Unintentional
+MIT,853,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,854,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,AI,Post-deployment,Unintentional
+MIT,855,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,856,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,857,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,858,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,859,True,1. Discrimination and Toxicity,1.3. Unequal performance across groups,AI,Post-deployment,Unintentional
+MIT,860,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,861,True,3. Misinformation,3.1. False or misleading information,AI,Post-deployment,Unintentional
+MIT,862,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,863,True,5. Human-Computer Interaction,5.1. Overreliance and unsafe use,AI,Post-deployment,Unintentional
+MIT,864,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,865,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,866,True,4. Malicious Actors & Misuse,"4.1. Disinformation, surveillance, and influence at scale",Human,Post-deployment,Intentional
+MIT,867,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,868,True,"7. AI system safety, failures, and limitations",7.3. Lack of capability or robustness,AI,Post-deployment,Unintentional
+MIT,869,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,870,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,871,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,872,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,873,True,1. Discrimination and Toxicity,1.2. Exposure to toxic content,AI,Post-deployment,Unintentional
+MIT,874,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,875,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,876,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,877,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,878,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
+MIT,879,True,3. Misinformation,3.1. False or misleading information,Human,Post-deployment,Intentional
+MIT,880,True,4. Malicious Actors & Misuse,"4.3. Fraud, scams, and targeted manipulation",Human,Post-deployment,Intentional
