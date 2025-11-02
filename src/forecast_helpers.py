@@ -25,6 +25,7 @@ from typing import Any, Dict, List, Optional, Tuple
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import seaborn as sns
 from scipy import stats
 from sklearn.base import clone
 from sklearn.compose import ColumnTransformer
@@ -944,20 +945,29 @@ def plot_total_panel(
     fig, ax = plt.subplots(figsize=(10, 6))
 
     # Multiple confidence levels
-    alphas = [0.9, 0.8, 0.5]
+    alphas = [0.9]
     colors = ["#fee5d9", "#fcae91", "#fb6a4a"]
 
-    for alpha, color in zip(alphas, colors):
-        lo = res.fore_total.quantile((1 - alpha) / 2)
-        hi = res.fore_total.quantile(1 - (1 - alpha) / 2)
-        ax.fill_between(
-            res.years_fore,
-            lo,
-            hi,
-            color=color,
-            alpha=0.3,
-            label=f"{int(100*alpha)}% PI",
-        )
+    # for alpha, color in zip(alphas, colors):
+    #     lo = res.fore_total_lo
+    #     hi = res.fore_total_hi
+    #     ax.fill_between(
+    #         res.years_fore,
+    #         lo,
+    #         hi,
+    #         color=color,
+    #         alpha=0.3,
+    #         label=f"{int(100*alpha)}% PI",
+    #     )
+    lo = res.fore_total_lo
+    hi = res.fore_total_hi
+    ax.fill_between(
+        res.years_fore,
+        lo,
+        hi,
+        alpha=0.3,
+        label=f"90% PI",
+    )
 
     actual_total = res.actual_by_year_full.sum(axis=1)
 
@@ -984,9 +994,9 @@ def plot_total_panel(
         lw=2,
         label="Total forecast (median)",
     )
-    ax.set_title(
-        f"Total incidents ({res.cat_col}) with {res.ytd_year} YTD assimilation"
-    )
+    # ax.set_title(
+    #     f"Total incidents ({res.cat_col}) with {res.ytd_year} YTD assimilation"
+    # )
     ax.set_xlabel("Year")
     ax.set_ylabel("Count")
     ax.legend()
@@ -1005,10 +1015,10 @@ def plot_total_panel(
         )
         ax2.set_ylabel("Relative Uncertainty Width")
 
-    plt.title(
-        f"Total Incidents Forecast with Uncertainty\n" + f"(90% PI shown in light red)"
-    )
-    plt.tight_layout()
+        plt.title(
+            f"Total Incidents Forecast with Uncertainty\n" + f"(90% PI shown in light red)"
+        )
+        plt.tight_layout()
 
 
 def plot_category_panels(res: ForecastResult, top_k: int | None = None):
@@ -1136,6 +1146,7 @@ def plot_category_panels(res: ForecastResult, top_k: int | None = None):
         ax.set_title(subtitle)
         ax.set_ylabel("Count")
         ax.set_xlabel("Year" if j == n_rows - 1 else "")
+        ax.set_xlim(2006,2030)
         ax.set_ylim(ymin_plot, ymax_plot)
         ax.grid(True, lw=0.3, alpha=0.5)
         if j == 0:
@@ -1235,3 +1246,45 @@ def make_summary_table(
 
     summary_table = summary_table.astype(float).round(0).astype("Int64")
     return summary_table
+
+def setup_plot_style():
+    """Set up consistent matplotlib styling for all notebooks"""
+    try:
+        import scienceplots
+        plt.style.use(["science", "no-latex"])
+    except ImportError:
+        print("Warning: scienceplots not available, using default style")
+    
+    width = 6.25  # onecolumn-format
+    width2 = 3.06  # twocolumn-format
+    aspect_ratio = np.sqrt(2)  # DIN A
+    height = width / aspect_ratio
+    height2 = width2 / aspect_ratio 
+
+    sns.set_palette("colorblind")
+    plt.rcParams.update({
+        "font.family": "sans-serif",
+        "font.sans-serif": ["Arial"],  # ACM fonts: ["Linux Biolinum O", "Linux Biolinum", "Biolinum"]
+        "figure.figsize": (width, height),
+        "figure.dpi": 300,
+        "font.size": 8,
+        "axes.labelsize": 8,
+        "axes.titlesize": 8,
+        "figure.titlesize": 8,
+        "legend.fontsize": 8,
+        "ytick.labelsize": 8,
+        "xtick.labelsize": 8,
+        "axes.spines.top": False,
+        "axes.spines.right": False,
+        "xtick.top": False,
+        "ytick.right": False,
+        "axes.linewidth": 0.5,
+    })
+    
+    return {
+        'width': width,
+        'width2': width2, 
+        'height': height,
+        'height2': height2,
+        'aspect_ratio': aspect_ratio
+    }
