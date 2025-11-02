@@ -21,6 +21,7 @@
 import logging
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Tuple
+import os
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -942,7 +943,7 @@ def plot_total_panel(
     res: ForecastResult, diagnostics: Optional[ForecastDiagnostics] = None
 ):
     """Enhanced total panel plot with clear uncertainty visualization"""
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(constrained_layout=True)
 
     # Multiple confidence levels
     alphas = [0.9]
@@ -1000,9 +1001,11 @@ def plot_total_panel(
     ax.set_xlabel("Year")
     ax.set_ylabel("Count")
     ax.legend()
+    ax.set_ylim(bottom=-50)
     ax.grid(True, lw=0.3, alpha=0.5)
     plt.tight_layout()
-    plt.show()
+    output_path = os.path.join("../output/total_incidents.pdf")
+    plt.savefig(output_path, dpi=300)
 
     if diagnostics:
         ax2 = ax.twinx()
@@ -1098,13 +1101,13 @@ def plot_category_panels(res: ForecastResult, top_k: int | None = None):
     ymin = max(0.0, (min(ymins) if ymins else 0.0))
     ymax = max(ymaxs) if ymaxs else (ymin + 1.0)
     pad = 0.05 * (ymax - ymin if ymax > ymin else 1.0)
-    ymin_plot = max(0.0, ymin - pad)
+    ymin_plot = max(-50, ymin - pad)
     ymax_plot = ymax + pad
 
     # --- plotting ---
     n_rows = K
     n_cols = 1
-    plt.figure(figsize=(8.2, max(2.6 * n_rows, 3.8)))
+    plt.figure(figsize=(6.25, max(2.6 * n_rows, 3.8)))
     for j, c in enumerate(cats):
         ax = plt.subplot(n_rows, n_cols, j + 1)
         if c in res.fore_lo.columns and c in res.fore_hi.columns:
@@ -1156,7 +1159,8 @@ def plot_category_panels(res: ForecastResult, top_k: int | None = None):
             else:
                 ax.legend(loc="upper left", fontsize=8)
     plt.tight_layout()
-    plt.show()
+    output_path = os.path.join("../output/incidents_category.pdf")
+    plt.savefig(output_path, dpi=300)
 
 
 # ----------------------
