@@ -1107,7 +1107,7 @@ def plot_category_panels(res: ForecastResult, top_k: int | None = None):
     # --- plotting ---
     n_rows = K
     n_cols = 1
-    plt.figure(figsize=(6.25, max(2.6 * n_rows, 3.8)))
+    plt.figure(constrained_layout=True)
     for j, c in enumerate(cats):
         ax = plt.subplot(n_rows, n_cols, j + 1)
         if c in res.fore_lo.columns and c in res.fore_hi.columns:
