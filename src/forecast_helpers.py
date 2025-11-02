@@ -943,7 +943,7 @@ def plot_total_panel(
     res: ForecastResult, diagnostics: Optional[ForecastDiagnostics] = None
 ):
     """Enhanced total panel plot with clear uncertainty visualization"""
-    fig, ax = plt.subplots(constrained_layout=True)
+    fig, ax = plt.subplots(constrained_layout=True, figsize=(6.25, 2.16))
 
     # Multiple confidence levels
     alphas = [0.9]
