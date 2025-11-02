@@ -4,3 +4,6 @@ pandas
 scikit-learn
 seaborn
 wordcloud
+ollama
+pymongo
+chromadb
