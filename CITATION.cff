@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Kalupahana"
+  given-names: "Chamod"
+- family-names: "Elbashir"
+  given-names: "Ahmed"
+- family-names: "Lübbers"
+  given-names: "Christopher L."
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+title: "(HckPrj) AI Incidents Forecastinge"
+date-released: 2025-11-02
+url: "https://apartresearch.com/project/ai-incidents-forecasting-w92p"
+organization: "Apart Research"
+note: "Research submission to the research sprint hosted by Apart."
