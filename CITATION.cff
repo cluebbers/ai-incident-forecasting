@@ -3,13 +3,27 @@ message: "If you use this software, please cite it as below."
 authors:
 - family-names: "Kalupahana"
   given-names: "Chamod"
-- family-names: "Elbashir"
-  given-names: "Ahmed"
 - family-names: "Lübbers"
   given-names: "Christopher L."
-  orcid: "https://orcid.org/0000-0000-0000-0000"
+- family-names: "Elbashir"
+  given-names: "Ahmed"
 title: "(HckPrj) AI Incidents Forecastinge"
 date-released: 2025-11-02
-url: "https://apartresearch.com/project/ai-incidents-forecasting-w92p"
+url: "https://github.com/cluebbers/ai-incident-forecasting
 organization: "Apart Research"
 note: "Research submission to the research sprint hosted by Apart."
+preferred-citation:
+  type: misc
+  authors:
+  - family-names: "Kalupahana"
+    given-names: "Chamod"
+  - family-names: "Lübbers"
+    given-names: "Christopher L."
+  - family-names: "Elbashir"
+    given-names: "Ahmed"
+  title: "(HckPrj) AI Incidents Forecastinge"
+  date-released: 2025-11-02
+  url: "https://apartresearch.com/project/ai-incidents-forecasting-w92p"
+  organization: "Apart Research"
+  note: "Research submission to the research sprint hosted by Apart."
+  
