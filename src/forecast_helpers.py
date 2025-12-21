@@ -940,88 +940,98 @@ def apply_to_columns(
 
 
 def plot_total_panel(
-    res: ForecastResult, diagnostics: Optional[ForecastDiagnostics] = None
+    res: ForecastResult,
+    diagnostics: Optional[ForecastDiagnostics] = None,
+    split_year: int = 2020,
 ):
-    """Enhanced total panel plot with clear uncertainty visualization"""
-    fig, ax = plt.subplots(constrained_layout=True, figsize=(6.25, 2.16))
+    """Enhanced total panel plot split into pre/post plots with clear uncertainty."""
 
-    # Multiple confidence levels
-    alphas = [0.9]
-    colors = ["#fee5d9", "#fcae91", "#fb6a4a"]
+    def _plot_segment(ax, title, year_predicate, log_y: bool = False):
+        lo = res.fore_total_lo
+        hi = res.fore_total_hi
 
-    # for alpha, color in zip(alphas, colors):
-    #     lo = res.fore_total_lo
-    #     hi = res.fore_total_hi
-    #     ax.fill_between(
-    #         res.years_fore,
-    #         lo,
-    #         hi,
-    #         color=color,
-    #         alpha=0.3,
-    #         label=f"{int(100*alpha)}% PI",
-    #     )
-    lo = res.fore_total_lo
-    hi = res.fore_total_hi
-    ax.fill_between(
-        res.years_fore,
-        lo,
-        hi,
-        alpha=0.3,
-        label=f"90% PI",
-    )
+        fore_years = np.asarray(res.years_fore)
+        fore_mask = year_predicate(fore_years)
+        if np.any(fore_mask):
+            ax.fill_between(
+                fore_years[fore_mask],
+                np.asarray(lo)[fore_mask],
+                np.asarray(hi)[fore_mask],
+                alpha=0.3,
+                label="90% PI",
+            )
 
-    actual_total = res.actual_by_year_full.sum(axis=1)
+        actual_total = res.actual_by_year_full.sum(axis=1)
+        actual_mask = year_predicate(actual_total.index.to_numpy())
+        if np.any(actual_mask):
+            ax.scatter(
+                actual_total.index[actual_mask],
+                actual_total.values[actual_mask],
+                s=18,
+                label="Total actual (incl. YTD est)",
+            )
 
-    ax.scatter(
-        actual_total.index,
-        actual_total.values,
-        s=18,
-        label="Total actual (incl. YTD est)",
-    )
+        if (
+            res.ytd_actual_total is not None
+            and res.have_ytd
+            and res.last_month is not None
+            and year_predicate(np.asarray([res.ytd_year]))[0]
+        ):
+            ax.scatter(
+                [res.ytd_year],
+                [res.ytd_actual_total],
+                s=28,
+                marker="x",
+                label=f"{res.ytd_year} YTD actual (m≤{res.last_month})",
+            )
 
-    if res.ytd_actual_total is not None and res.have_ytd and res.last_month is not None:
-        ax.scatter(
-            [res.ytd_year],
-            [res.ytd_actual_total],
-            s=28,
-            marker="x",
-            label=f"{res.ytd_year} YTD actual (m≤{res.last_month})",
-        )
+        fore_index = res.fore_total.index.to_numpy()
+        fore_values = res.fore_total.values
+        fore_line_mask = year_predicate(fore_index)
+        if np.any(fore_line_mask):
+            ax.plot(
+                fore_index[fore_line_mask],
+                fore_values[fore_line_mask],
+                "--",
+                lw=2,
+                label="Total forecast (median)",
+            )
 
-    ax.plot(
-        res.fore_total.index,
-        res.fore_total.values,
-        "--",
-        lw=2,
-        label="Total forecast (median)",
-    )
-    # ax.set_title(
-    #     f"Total incidents ({res.cat_col}) with {res.ytd_year} YTD assimilation"
-    # )
-    ax.set_xlabel("Year")
-    ax.set_ylabel("Count")
-    ax.legend()
-    ax.set_ylim(bottom=-50)
-    ax.grid(True, lw=0.3, alpha=0.5)
-    plt.tight_layout()
-    output_path = os.path.join("../output/total_incidents.pdf")
-    plt.savefig(output_path, dpi=300)
+        ax.set_title(title)
+        ax.set_xlabel("Year")
+        ax.set_ylabel("Count")
+        ax.legend()
+        if log_y:
+            ax.set_yscale("log")
+        else:
+            ax.set_ylim(bottom=-2)
+        ax.grid(True, lw=0.3, alpha=0.5)
 
-    if diagnostics:
-        ax2 = ax.twinx()
-        ax2.plot(
-            res.years_fore,
-            diagnostics.uncertainty_width,
-            "k--",
-            alpha=0.3,
-            label="Uncertainty Width",
-        )
-        ax2.set_ylabel("Relative Uncertainty Width")
+        if diagnostics is not None and np.any(fore_mask):
+            ax2 = ax.twinx()
+            ax2.plot(
+                fore_years[fore_mask],
+                diagnostics.uncertainty_width[fore_mask],
+                "k--",
+                alpha=0.3,
+                label="Uncertainty Width",
+            )
+            ax2.set_ylabel("Relative Uncertainty Width")
 
-        plt.title(
-            f"Total Incidents Forecast with Uncertainty\n" + f"(90% PI shown in light red)"
-        )
-        plt.tight_layout()
+    import numpy as np
+
+    pre_title = f"Total incidents (pre-{split_year})"
+    post_title = f"Total incidents ({split_year} and after)"
+
+    fig_pre, ax_pre = plt.subplots(constrained_layout=True, figsize=(6.25, 2.16))
+    _plot_segment(ax_pre, pre_title, lambda years: years < split_year)
+    pre_output_path = os.path.join(f"../output/total_incidents_pre_{split_year}.pdf")
+    fig_pre.savefig(pre_output_path, dpi=300)
+
+    fig_post, ax_post = plt.subplots(constrained_layout=True, figsize=(6.25, 2.16))
+    _plot_segment(ax_post, post_title, lambda years: years >= split_year, log_y=True)
+    post_output_path = os.path.join(f"../output/total_incidents_post_{split_year}.pdf")
+    fig_post.savefig(post_output_path, dpi=300)
 
 
 def plot_category_panels(res: ForecastResult, top_k: int | None = None):
