@@ -943,6 +943,7 @@ def plot_total_panel(
     res: ForecastResult,
     diagnostics: Optional[ForecastDiagnostics] = None,
     split_year: int = 2020,
+    min_year: int = 1995,
 ):
     """Enhanced total panel plot split into pre/post plots with clear uncertainty."""
 
@@ -1023,15 +1024,23 @@ def plot_total_panel(
     pre_title = f"Total incidents (pre-{split_year})"
     post_title = f"Total incidents ({split_year} and after)"
 
-    fig_pre, ax_pre = plt.subplots(constrained_layout=True, figsize=(6.25, 2.16))
-    _plot_segment(ax_pre, pre_title, lambda years: years < split_year)
-    pre_output_path = os.path.join(f"../output/total_incidents_pre_{split_year}.pdf")
-    fig_pre.savefig(pre_output_path, dpi=300)
-
-    fig_post, ax_post = plt.subplots(constrained_layout=True, figsize=(6.25, 2.16))
-    _plot_segment(ax_post, post_title, lambda years: years >= split_year, log_y=True)
-    post_output_path = os.path.join(f"../output/total_incidents_post_{split_year}.pdf")
-    fig_post.savefig(post_output_path, dpi=300)
+    fig, (ax_pre, ax_post) = plt.subplots(
+        2, 1, constrained_layout=True, figsize=(6.25, 4.32)
+    )
+    _plot_segment(
+        ax_pre,
+        pre_title,
+        lambda years: (years < split_year) & (years > min_year),
+        log_y=True,
+    )
+    _plot_segment(
+        ax_post,
+        post_title,
+        lambda years: years >= split_year,
+        log_y=True,
+    )
+    output_path = os.path.join(f"../output/total_incidents_split_{split_year}.pdf")
+    fig.savefig(output_path, dpi=300)
 
 
 def plot_category_panels(res: ForecastResult, top_k: int | None = None):
