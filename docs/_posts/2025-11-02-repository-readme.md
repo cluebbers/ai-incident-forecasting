@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "AI Incident Forecasting: Repository Readme"
-date: 2025‑11-02 10:00:00 +0000
+date: 2025‑12-23 14:00:00 +0000
 categories: forecasting incidents
 ---
 # AI Incident Forecasting
