@@ -950,6 +950,7 @@ def plot_total_panel(
     y_min: Optional[float] = None,
     y_max: Optional[float] = None,
     figsize: Optional[tuple[float, float]] = None,
+    sim_line_color: str = "#457A8418",
     show_sims: bool = False,
     max_sim_lines: int = 150,
 ):
@@ -992,7 +993,7 @@ def plot_total_panel(
                 ax.plot(
                     res.years_fore,
                     total_sims[idx],
-                    color="#457A8418",
+                    color=sim_line_color,
                     lw=0.6,
                     zorder=2,
                 )
