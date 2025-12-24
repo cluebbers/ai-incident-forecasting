@@ -405,99 +405,80 @@ def plot_total_panel_logistic_regression(
     y_max: Optional[float] = None,
     figsize: Optional[tuple] = None,
     show_uncertainty: bool = True,
+    show_empirical_markers: bool = True,
+    legend_loc: str = "upper left",
+    legend_outside: bool = True,
+    legend_bbox: tuple[float, float] = (1.02, 1.0),
+    note_pos: tuple[float, float] = (0.98, 0.02),
 ):
-    """Enhanced total panel plot with clear uncertainty visualization"""
+    """Stacked area chart of predicted category shares over time."""
     fig, ax = plt.subplots(
         constrained_layout=True, figsize=figsize if figsize is not None else (6.25, 2.16)
     )
 
-    # Multiple confidence levels
-    alphas = [0.9]
-    colors = ["#fee5d9", "#fcae91", "#fb6a4a"]
+    forecast_shares = res.fore_df.div(res.fore_df.sum(axis=1), axis=0)
+    years = forecast_shares.index.to_numpy(dtype=float)
+    categories = list(forecast_shares.columns)
+    colors = plt.cm.tab20(np.linspace(0, 1, len(categories)))
 
-    # for alpha, color in zip(alphas, colors):
-    #     lo = res.fore_total_lo
-    #     hi = res.fore_total_hi
-    #     ax.fill_between(
-    #         res.years_fore,
-    #         lo,
-    #         hi,
-    #         color=color,
-    #         alpha=0.3,
-    #         label=f"{int(100*alpha)}% PI",
-    #     )
-    if show_uncertainty:
-        lo = res.fore_total_lo
-        hi = res.fore_total_hi
-        ax.fill_between(
-            res.years_fore,
-            lo,
-            hi,
-            alpha=0.3,
-            label="90% PI",
-        )
-
-    actual_total = res.actual_by_year_full.sum(axis=1)
-
-    ax.scatter(
-        actual_total.index,
-        actual_total.values,
-        s=18,
-        label="Total actual (incl. YTD est)",
+    ax.stackplot(
+        years,
+        [forecast_shares[c].to_numpy(dtype=float) for c in categories],
+        labels=categories,
+        colors=colors,
+        alpha=0.85,
     )
 
-    if res.ytd_actual_total is not None and res.have_ytd and res.last_month is not None:
-        ax.scatter(
-            [res.ytd_year],
-            [res.ytd_actual_total],
-            s=28,
-            marker="x",
-            label=f"{res.ytd_year} YTD actual (m≤{res.last_month})",
-        )
+    if show_empirical_markers:
+        actual = res.actual_by_year_full.reindex(columns=categories).fillna(0)
+        actual_shares = actual.div(actual.sum(axis=1).replace(0, np.nan), axis=0)
+        for idx, cat in enumerate(categories):
+            ax.plot(
+                actual_shares.index,
+                actual_shares[cat],
+                linestyle="",
+                marker="o",
+                markersize=2,
+                color=colors[idx],
+                alpha=0.6,
+                zorder=3,
+            )
 
-    ax.plot(
-        res.fore_total.index,
-        res.fore_total.values,
-        "--",
-        lw=2,
-        label="Total forecast (median)",
+    ax.text(
+        note_pos[0],
+        note_pos[1],
+        "shares sum to 1 (softmax)",
+        transform=ax.transAxes,
+        ha="right",
+        va="bottom",
+        fontsize=7,
+        color="#666666",
     )
-    # ax.set_title(
-    #     f"Total incidents ({res.cat_col}) with {res.ytd_year} YTD assimilation"
-    # )
+
     ax.set_xlabel("Year")
-    ax.set_ylabel("Count")
-    ax.legend()
-    x_min_auto = min(actual_total.index.min(), res.years_fore.min())
-    x_max_auto = max(actual_total.index.max(), res.years_fore.max())
-    ax.set_xlim(x_min if x_min is not None else x_min_auto,
-                x_max if x_max is not None else x_max_auto)
-    y_min_auto = -50
-    y_max_auto = max(
-        float(actual_total.max()),
-        float(res.fore_total_hi.max()) if res.fore_total_hi is not None else 0.0,
+    ax.set_ylabel("Share")
+    if legend_outside:
+        ax.legend(
+            loc=legend_loc,
+            bbox_to_anchor=legend_bbox,
+            frameon=False,
+            fontsize=7,
+            ncol=2,
+        )
+    else:
+        ax.legend(loc=legend_loc, frameon=False, fontsize=7, ncol=2)
+
+    x_min_auto = years.min()
+    x_max_auto = years.max()
+    ax.set_xlim(
+        x_min if x_min is not None else x_min_auto,
+        x_max if x_max is not None else x_max_auto,
     )
     ax.set_ylim(
-        y_min if y_min is not None else y_min_auto,
-        y_max if y_max is not None else y_max_auto,
+        y_min if y_min is not None else 0.0,
+        y_max if y_max is not None else 1.0,
     )
-    ax.grid(True, lw=0.3, alpha=0.5)
+    ax.grid(True, lw=0.3, alpha=0.4)
     plt.tight_layout()
     output_path = os.path.join("../output/total_incidents.pdf")
     plt.savefig(output_path, dpi=300)
-
-    if diagnostics:
-        ax2 = ax.twinx()
-        ax2.plot(
-            res.years_fore,
-            diagnostics.uncertainty_width,
-            "k--",
-            alpha=0.3,
-            label="Uncertainty Width",
-        )
-        ax2.set_ylabel("Relative Uncertainty Width")
-
-        plt.title(
-            f"Total Incidents Forecast with Uncertainty\n" + f"(90% PI shown in light red)"
-        )
-        plt.tight_layout()
