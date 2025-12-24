@@ -942,10 +942,19 @@ def apply_to_columns(
 
 ### OG function
 def plot_total_panel(
-    res: ForecastResult, diagnostics: Optional[ForecastDiagnostics] = None
+    res: ForecastResult,
+    diagnostics: Optional[ForecastDiagnostics] = None,
+    x_min: Optional[int] = None,
+    x_max: Optional[int] = None,
+    y_min: Optional[float] = None,
+    y_max: Optional[float] = None,
+    figsize: Optional[tuple] = None,
+    show_uncertainty: bool = True,
 ):
     """Enhanced total panel plot with clear uncertainty visualization"""
-    fig, ax = plt.subplots(constrained_layout=True, figsize=(6.25, 2.16))
+    fig, ax = plt.subplots(
+        constrained_layout=True, figsize=figsize if figsize is not None else (6.25, 2.16)
+    )
 
     # Multiple confidence levels
     alphas = [0.9]
@@ -962,15 +971,16 @@ def plot_total_panel(
     #         alpha=0.3,
     #         label=f"{int(100*alpha)}% PI",
     #     )
-    lo = res.fore_total_lo
-    hi = res.fore_total_hi
-    ax.fill_between(
-        res.years_fore,
-        lo,
-        hi,
-        alpha=0.3,
-        label=f"90% PI",
-    )
+    if show_uncertainty:
+        lo = res.fore_total_lo
+        hi = res.fore_total_hi
+        ax.fill_between(
+            res.years_fore,
+            lo,
+            hi,
+            alpha=0.3,
+            label="90% PI",
+        )
 
     actual_total = res.actual_by_year_full.sum(axis=1)
 
@@ -1003,7 +1013,19 @@ def plot_total_panel(
     ax.set_xlabel("Year")
     ax.set_ylabel("Count")
     ax.legend()
-    ax.set_ylim(bottom=-50)
+    x_min_auto = min(actual_total.index.min(), res.years_fore.min())
+    x_max_auto = max(actual_total.index.max(), res.years_fore.max())
+    ax.set_xlim(x_min if x_min is not None else x_min_auto,
+                x_max if x_max is not None else x_max_auto)
+    y_min_auto = -50
+    y_max_auto = max(
+        float(actual_total.max()),
+        float(res.fore_total_hi.max()) if res.fore_total_hi is not None else 0.0,
+    )
+    ax.set_ylim(
+        y_min if y_min is not None else y_min_auto,
+        y_max if y_max is not None else y_max_auto,
+    )
     ax.grid(True, lw=0.3, alpha=0.5)
     plt.tight_layout()
     output_path = os.path.join("../output/total_incidents.pdf")
