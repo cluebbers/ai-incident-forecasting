@@ -1058,6 +1058,7 @@ def plot_total_panel_hinge(
     show_uncertainty: bool = True,
     hinge_year: Optional[int] = 2021,
     legend_loc: str = "upper right",
+    y_offset_mult: float = 0.05,
 ):
     """Mini chart with a hinge (kinked) trend line."""
     fig, ax = plt.subplots(
@@ -1181,6 +1182,14 @@ def plot_total_panel_hinge(
     ax.set_ylim(
         y_min if y_min is not None else y_min_auto,
         y_max if y_max is not None else y_max_auto,
+    )
+    y_offset = y_offset_mult * (y_max_auto - y_min_auto)
+    ax.text(
+        after_mid,
+        after_val - y_offset,
+        "+ growth boost after 2021",
+        fontsize=8,
+        color="#555555",
     )
     ax.grid(True, lw=0.3, alpha=0.5)
     plt.tight_layout()
