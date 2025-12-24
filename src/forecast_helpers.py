@@ -1026,6 +1026,107 @@ def plot_total_panel(
         plt.tight_layout()
 
 
+
+def plot_total_panel_possion_regression(
+    res: ForecastResult,
+    diagnostics: Optional[ForecastDiagnostics] = None,
+    x_min: Optional[int] = None,
+    x_max: Optional[int] = None,
+    y_min: Optional[float] = None,
+    y_max: Optional[float] = None,
+    show_uncertainty: bool = True,
+    show_linear_fit: bool = False,
+):
+    """Mini chart: counts over time with Poisson GLM mean and uncertainty."""
+    fig, ax = plt.subplots(constrained_layout=True, figsize=(3.4, 2.0))
+
+    actual_total = res.actual_by_year_full.sum(axis=1)
+    mean_series = res.fore_total
+
+    if show_uncertainty:
+        ax.fill_between(
+            res.years_fore,
+            res.fore_total_lo,
+            res.fore_total_hi,
+            color="#c6dbef",
+            alpha=0.5,
+            lw=0,
+        )
+
+    ax.plot(
+        mean_series.index,
+        mean_series.values,
+        "--",
+        lw=1.6,
+        color="#1f77b4",
+    )
+    if show_linear_fit and len(actual_total) >= 2:
+        x_vals = actual_total.index.to_numpy(dtype=float)
+        y_vals = actual_total.to_numpy(dtype=float)
+        slope, intercept = np.polyfit(x_vals, y_vals, 1)
+        fit_years = np.array([x_vals.min(), x_vals.max()])
+        fit_vals = slope * fit_years + intercept
+        ax.plot(
+            fit_years,
+            fit_vals,
+            "-",
+            lw=1.2,
+            color="#8c8c8c",
+        )
+    ax.scatter(
+        actual_total.index,
+        actual_total.values,
+        s=14,
+        color="black",
+        zorder=3,
+    )
+
+    ax.text(
+        0.02,
+        0.92,
+        r"$y_t \sim \mathrm{Poisson}(\lambda_t)$",
+        transform=ax.transAxes,
+        fontsize=8,
+        color="#333333",
+    )
+
+    ax.set_xlabel("Year")
+    ax.set_ylabel("Count")
+    x_min_auto = min(actual_total.index.min(), res.years_fore.min())
+    x_max_auto = max(actual_total.index.max(), res.years_fore.max())
+    ax.set_xlim(x_min if x_min is not None else x_min_auto,
+                x_max if x_max is not None else x_max_auto)
+    y_min_auto = 0
+    y_max_auto = max(
+        float(actual_total.max()),
+        float(res.fore_total_hi.max()) if res.fore_total_hi is not None else 0.0,
+    )
+    ax.set_ylim(
+        y_min if y_min is not None else y_min_auto,
+        y_max if y_max is not None else y_max_auto,
+    )
+    ax.grid(True, lw=0.3, alpha=0.4)
+    plt.tight_layout()
+    output_path = os.path.join("../output/total_incidents.pdf")
+    plt.savefig(output_path, dpi=300)
+
+    if diagnostics:
+        ax2 = ax.twinx()
+        ax2.plot(
+            res.years_fore,
+            diagnostics.uncertainty_width,
+            "k--",
+            alpha=0.3,
+            label="Uncertainty Width",
+        )
+        ax2.set_ylabel("Relative Uncertainty Width")
+
+        plt.title(
+            f"Total Incidents Forecast with Uncertainty\n" + f"(90% PI shown in light red)"
+        )
+        plt.tight_layout()
+
+
 def plot_total_panel_monte_carlo(
     res: ForecastResult,
     diagnostics: Optional[ForecastDiagnostics] = None,
