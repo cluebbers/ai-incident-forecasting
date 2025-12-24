@@ -945,6 +945,10 @@ def plot_total_panel(
     res: ForecastResult,
     diagnostics: Optional[ForecastDiagnostics] = None,
     zoom_start_year: Optional[int] = None,
+    max_year: Optional[int] = None,
+    show_legend: bool = True,
+    y_min: Optional[float] = None,
+    y_max: Optional[float] = None,
     show_sims: bool = False,
     max_sim_lines: int = 150,
 ):
@@ -1021,10 +1025,18 @@ def plot_total_panel(
     # )
     ax.set_xlabel("Year")
     ax.set_ylabel("Count")
-    ax.legend()
-    ax.set_ylim(bottom=-50)
-    if zoom_start_year is not None:
-        ax.set_xlim(left=zoom_start_year, right=max(res.years_fore))
+    if show_legend:
+        ax.legend()
+    if y_min is None and y_max is None:
+        ax.set_ylim(bottom=-50)
+    else:
+        ax.set_ylim(bottom=y_min, top=y_max)
+    if zoom_start_year is not None or max_year is not None:
+        right = max_year if max_year is not None else max(res.years_fore)
+        if zoom_start_year is not None:
+            ax.set_xlim(left=zoom_start_year, right=right)
+        else:
+            ax.set_xlim(right=right)
     ax.grid(True, lw=0.3, alpha=0.5)
     plt.tight_layout()
     output_path = os.path.join("../output/total_incidents.pdf")
@@ -1047,7 +1059,12 @@ def plot_total_panel(
         plt.tight_layout()
 
 
-def plot_category_panels(res: ForecastResult, top_k: int | None = None):
+def plot_category_panels(
+    res: ForecastResult,
+    top_k: int | None = None,
+    max_year: Optional[int] = None,
+    show_legend: bool = True,
+):
     """
     One subplot per category (optionally only the top_k), shared y-lims,
     with actuals + forecast median + 90% PI. Creates one figure.
@@ -1172,10 +1189,11 @@ def plot_category_panels(res: ForecastResult, top_k: int | None = None):
         ax.set_title(subtitle)
         ax.set_ylabel("Count")
         ax.set_xlabel("Year" if j == n_rows - 1 else "")
-        ax.set_xlim(2006,2030)
+        right = max_year if max_year is not None else 2030
+        ax.set_xlim(2006, right)
         ax.set_ylim(ymin_plot, ymax_plot)
         ax.grid(True, lw=0.3, alpha=0.5)
-        if j == 0:
+        if show_legend and j == 0:
             base_title = f"Top {K} of {len(cats_all)}" if (top_k is not None) else None
             if base_title:
                 ax.legend(loc="upper left", fontsize=8, title=base_title)
