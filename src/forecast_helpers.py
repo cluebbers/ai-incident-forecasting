@@ -940,8 +940,93 @@ def apply_to_columns(
 # Plotting helpers
 # ----------------------
 
-
+### OG function
 def plot_total_panel(
+    res: ForecastResult, diagnostics: Optional[ForecastDiagnostics] = None
+):
+    """Enhanced total panel plot with clear uncertainty visualization"""
+    fig, ax = plt.subplots(constrained_layout=True, figsize=(6.25, 2.16))
+
+    # Multiple confidence levels
+    alphas = [0.9]
+    colors = ["#fee5d9", "#fcae91", "#fb6a4a"]
+
+    # for alpha, color in zip(alphas, colors):
+    #     lo = res.fore_total_lo
+    #     hi = res.fore_total_hi
+    #     ax.fill_between(
+    #         res.years_fore,
+    #         lo,
+    #         hi,
+    #         color=color,
+    #         alpha=0.3,
+    #         label=f"{int(100*alpha)}% PI",
+    #     )
+    lo = res.fore_total_lo
+    hi = res.fore_total_hi
+    ax.fill_between(
+        res.years_fore,
+        lo,
+        hi,
+        alpha=0.3,
+        label=f"90% PI",
+    )
+
+    actual_total = res.actual_by_year_full.sum(axis=1)
+
+    ax.scatter(
+        actual_total.index,
+        actual_total.values,
+        s=18,
+        label="Total actual (incl. YTD est)",
+    )
+
+    if res.ytd_actual_total is not None and res.have_ytd and res.last_month is not None:
+        ax.scatter(
+            [res.ytd_year],
+            [res.ytd_actual_total],
+            s=28,
+            marker="x",
+            label=f"{res.ytd_year} YTD actual (m≤{res.last_month})",
+        )
+
+    ax.plot(
+        res.fore_total.index,
+        res.fore_total.values,
+        "--",
+        lw=2,
+        label="Total forecast (median)",
+    )
+    # ax.set_title(
+    #     f"Total incidents ({res.cat_col}) with {res.ytd_year} YTD assimilation"
+    # )
+    ax.set_xlabel("Year")
+    ax.set_ylabel("Count")
+    ax.legend()
+    ax.set_ylim(bottom=-50)
+    ax.grid(True, lw=0.3, alpha=0.5)
+    plt.tight_layout()
+    output_path = os.path.join("../output/total_incidents.pdf")
+    plt.savefig(output_path, dpi=300)
+
+    if diagnostics:
+        ax2 = ax.twinx()
+        ax2.plot(
+            res.years_fore,
+            diagnostics.uncertainty_width,
+            "k--",
+            alpha=0.3,
+            label="Uncertainty Width",
+        )
+        ax2.set_ylabel("Relative Uncertainty Width")
+
+        plt.title(
+            f"Total Incidents Forecast with Uncertainty\n" + f"(90% PI shown in light red)"
+        )
+        plt.tight_layout()
+
+
+def plot_total_panel_monte_carlo(
     res: ForecastResult,
     diagnostics: Optional[ForecastDiagnostics] = None,
     zoom_start_year: Optional[int] = None,
