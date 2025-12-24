@@ -1036,9 +1036,12 @@ def plot_total_panel_possion_regression(
     y_max: Optional[float] = None,
     show_uncertainty: bool = True,
     show_linear_fit: bool = False,
+    figsize: Optional[tuple] = None,
 ):
     """Mini chart: counts over time with Poisson GLM mean and uncertainty."""
-    fig, ax = plt.subplots(constrained_layout=True, figsize=(3.4, 2.0))
+    fig, ax = plt.subplots(
+        constrained_layout=True, figsize=figsize if figsize is not None else (3.4, 2.0)
+    )
 
     actual_total = res.actual_by_year_full.sum(axis=1)
     mean_series = res.fore_total
@@ -1059,6 +1062,7 @@ def plot_total_panel_possion_regression(
         "--",
         lw=1.6,
         color="#1f77b4",
+        label="Poisson Regression",
     )
     if show_linear_fit and len(actual_total) >= 2:
         x_vals = actual_total.index.to_numpy(dtype=float)
@@ -1072,26 +1076,20 @@ def plot_total_panel_possion_regression(
             "-",
             lw=1.2,
             color="#8c8c8c",
+            label="Linear Regression",
         )
     ax.scatter(
         actual_total.index,
         actual_total.values,
         s=14,
-        color="black",
+        color="orange",
         zorder=3,
-    )
-
-    ax.text(
-        0.02,
-        0.92,
-        r"$y_t \sim \mathrm{Poisson}(\lambda_t)$",
-        transform=ax.transAxes,
-        fontsize=8,
-        color="#333333",
+        label="Total Actual",
     )
 
     ax.set_xlabel("Year")
     ax.set_ylabel("Count")
+    ax.legend(loc="upper left", frameon=False, fontsize=8)
     x_min_auto = min(actual_total.index.min(), res.years_fore.min())
     x_max_auto = max(actual_total.index.max(), res.years_fore.max())
     ax.set_xlim(x_min if x_min is not None else x_min_auto,
