@@ -1124,13 +1124,22 @@ def plot_total_panel_hinge(
     fit_x = fit_years - float(hinge_year)
     fit_hinge = np.maximum(0.0, fit_x)
     fit_vals = coef[0] + coef[1] * fit_x + coef[2] * fit_hinge
+    pre_mask = fit_years <= hinge_year
+    post_mask = fit_years >= hinge_year
     ax.plot(
-        fit_years,
-        fit_vals,
+        fit_years[pre_mask],
+        fit_vals[pre_mask],
         "-",
         lw=2,
         color="#1f77b4",
         label="Kinked trend",
+    )
+    ax.plot(
+        fit_years[post_mask],
+        fit_vals[post_mask],
+        "--",
+        lw=2,
+        color="#1f77b4",
     )
 
     ax.axvline(hinge_year, color="#666666", lw=1, ls=":")
