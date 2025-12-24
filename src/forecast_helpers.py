@@ -949,11 +949,13 @@ def plot_total_panel(
     show_legend: bool = True,
     y_min: Optional[float] = None,
     y_max: Optional[float] = None,
+    figsize: Optional[tuple[float, float]] = None,
     show_sims: bool = False,
     max_sim_lines: int = 150,
 ):
     """Enhanced total panel plot with clear uncertainty visualization"""
-    fig, ax = plt.subplots(constrained_layout=True, figsize=(6.25, 2.16))
+    fig_size = figsize if figsize is not None else (6.25, 2.16)
+    fig, ax = plt.subplots(constrained_layout=True, figsize=fig_size)
 
     # Multiple confidence levels
     alphas = [0.9]
