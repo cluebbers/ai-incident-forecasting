@@ -123,6 +123,7 @@ class ForecastResult:
     ytd_year: int
     cat_col: str
     date_col: str
+    total_sims: Optional[np.ndarray] = None
 
 
 @dataclass
@@ -870,6 +871,7 @@ def _make_forecasts(
         ytd_year=cfg.YTD_YEAR,
         cat_col="",
         date_col="",
+        total_sims=tot_sim,
     )
 
 
@@ -940,7 +942,11 @@ def apply_to_columns(
 
 
 def plot_total_panel(
-    res: ForecastResult, diagnostics: Optional[ForecastDiagnostics] = None
+    res: ForecastResult,
+    diagnostics: Optional[ForecastDiagnostics] = None,
+    zoom_start_year: Optional[int] = None,
+    show_sims: bool = False,
+    max_sim_lines: int = 150,
 ):
     """Enhanced total panel plot with clear uncertainty visualization"""
     fig, ax = plt.subplots(constrained_layout=True, figsize=(6.25, 2.16))
@@ -966,9 +972,24 @@ def plot_total_panel(
         res.years_fore,
         lo,
         hi,
+        color="#9ecae1",
         alpha=0.3,
         label=f"90% PI",
     )
+
+    if show_sims and res.total_sims is not None and len(res.total_sims) > 0:
+        total_sims = res.total_sims
+        sim_count = min(max_sim_lines, total_sims.shape[0])
+        if sim_count > 0:
+            sim_idx = np.linspace(0, total_sims.shape[0] - 1, sim_count, dtype=int)
+            for idx in sim_idx:
+                ax.plot(
+                    res.years_fore,
+                    total_sims[idx],
+                    color="#457A8418",
+                    lw=0.6,
+                    zorder=2,
+                )
 
     actual_total = res.actual_by_year_full.sum(axis=1)
 
@@ -1002,6 +1023,8 @@ def plot_total_panel(
     ax.set_ylabel("Count")
     ax.legend()
     ax.set_ylim(bottom=-50)
+    if zoom_start_year is not None:
+        ax.set_xlim(left=zoom_start_year, right=max(res.years_fore))
     ax.grid(True, lw=0.3, alpha=0.5)
     plt.tight_layout()
     output_path = os.path.join("../output/total_incidents.pdf")
