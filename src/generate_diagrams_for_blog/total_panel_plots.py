@@ -1,10 +1,25 @@
 import os
+import sys
+from pathlib import Path
 from typing import Optional
 
 import matplotlib.pyplot as plt
 import numpy as np
 
+SRC_DIR = Path(__file__).resolve().parents[1]
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
+
 from forecast_helpers import ForecastDiagnostics, ForecastResult
+
+
+def _format_output_path(filename: str) -> str:
+    safe_name = filename.strip() if filename else "total_incidents.pdf"
+    if not safe_name:
+        safe_name = "total_incidents.pdf"
+    if "." not in os.path.basename(safe_name):
+        safe_name = f"{safe_name}.pdf"
+    return os.path.join("../output", safe_name)
 
 
 def plot_total_panel_hinge(
@@ -19,6 +34,7 @@ def plot_total_panel_hinge(
     hinge_year: Optional[int] = 2021,
     legend_loc: str = "upper right",
     y_offset_mult: float = 0.05,
+    output_name: str = "total_incidents.pdf",
 ):
     """Mini chart with a hinge (kinked) trend line."""
     fig, ax = plt.subplots(
@@ -155,7 +171,7 @@ def plot_total_panel_hinge(
     )
     ax.grid(True, lw=0.3, alpha=0.5)
     plt.tight_layout()
-    output_path = os.path.join("../output/total_incidents.pdf")
+    output_path = _format_output_path(output_name)
     plt.savefig(output_path, dpi=300)
 
     if diagnostics:
@@ -185,6 +201,7 @@ def plot_total_panel_possion_regression(
     show_uncertainty: bool = True,
     show_linear_fit: bool = False,
     figsize: Optional[tuple] = None,
+    output_name: str = "total_incidents.pdf",
 ):
     """Mini chart: counts over time with Poisson GLM mean and uncertainty."""
     fig, ax = plt.subplots(
@@ -255,7 +272,7 @@ def plot_total_panel_possion_regression(
     )
     ax.grid(True, lw=0.3, alpha=0.4)
     plt.tight_layout()
-    output_path = os.path.join("../output/total_incidents.pdf")
+    output_path = _format_output_path(output_name)
     plt.savefig(output_path, dpi=300)
 
     if diagnostics:
@@ -287,6 +304,7 @@ def plot_total_panel_monte_carlo(
     sim_line_color: str = "#457A8418",
     show_sims: bool = False,
     max_sim_lines: int = 150,
+    output_name: str = "total_incidents.pdf",
 ):
     """Enhanced total panel plot with clear uncertainty visualization"""
     fig_size = figsize if figsize is not None else (6.25, 2.16)
@@ -376,7 +394,7 @@ def plot_total_panel_monte_carlo(
             ax.set_xlim(right=right)
     ax.grid(True, lw=0.3, alpha=0.5)
     plt.tight_layout()
-    output_path = os.path.join("../output/total_incidents.pdf")
+    output_path = _format_output_path(output_name)
     plt.savefig(output_path, dpi=300)
 
     if diagnostics:
@@ -410,6 +428,7 @@ def plot_total_panel_logistic_regression(
     legend_outside: bool = True,
     legend_bbox: tuple[float, float] = (1.02, 1.0),
     note_pos: tuple[float, float] = (0.98, 0.02),
+    output_name: str = "total_incidents.pdf",
 ):
     """Stacked area chart of predicted category shares over time."""
     fig, ax = plt.subplots(
@@ -480,5 +499,5 @@ def plot_total_panel_logistic_regression(
     )
     ax.grid(True, lw=0.3, alpha=0.4)
     plt.tight_layout()
-    output_path = os.path.join("../output/total_incidents.pdf")
+    output_path = _format_output_path(output_name)
     plt.savefig(output_path, dpi=300)
