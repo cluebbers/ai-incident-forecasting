@@ -172,7 +172,7 @@ def plot_total_panel_hinge(
     ax.grid(True, lw=0.3, alpha=0.5)
     plt.tight_layout()
     output_path = _format_output_path(output_name)
-    plt.savefig(output_path, dpi=300)
+    plt.savefig(output_path, dpi=1000)
 
     if diagnostics:
         ax2 = ax.twinx()
@@ -273,7 +273,7 @@ def plot_total_panel_possion_regression(
     ax.grid(True, lw=0.3, alpha=0.4)
     plt.tight_layout()
     output_path = _format_output_path(output_name)
-    plt.savefig(output_path, dpi=300)
+    plt.savefig(output_path, dpi=1000)
 
     if diagnostics:
         ax2 = ax.twinx()
@@ -395,7 +395,7 @@ def plot_total_panel_monte_carlo(
     ax.grid(True, lw=0.3, alpha=0.5)
     plt.tight_layout()
     output_path = _format_output_path(output_name)
-    plt.savefig(output_path, dpi=300)
+    plt.savefig(output_path, dpi=1000)
 
     if diagnostics:
         ax2 = ax.twinx()
@@ -500,4 +500,4 @@ def plot_total_panel_logistic_regression(
     ax.grid(True, lw=0.3, alpha=0.4)
     plt.tight_layout()
     output_path = _format_output_path(output_name)
-    plt.savefig(output_path, dpi=300)
+    plt.savefig(output_path, dpi=1000)
