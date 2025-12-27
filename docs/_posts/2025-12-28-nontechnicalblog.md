@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "AI Incident Forecasting: December 2025 Update"
-date: 2025-12-28 10:00:00 +0000
 categories: forecasting incidents
 ---
 
