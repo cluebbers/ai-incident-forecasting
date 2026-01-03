@@ -2,6 +2,7 @@
 layout: post
 title: "AI Incident Forecasting: December 2025 Update"
 categories: forecasting incidents
+published: false
 ---
 
 AI Incident Forecasting
@@ -182,4 +183,3 @@ A Comprehensive Meta-Review, Database, and Taxonomy of Risks From Artificial Int
 
 * “Year-to-date adjustment” means we estimate a full-year total from partial-year data by using historical seasonality in reporting; this is a pragmatic fix for reporting lag, not a claim about when incidents truly occurred.
 ** “Surge” means a category’s share increased sharply in the most recent period compared to its earlier baseline; we use this to avoid underreacting to sudden shifts.
-
