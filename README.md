@@ -16,6 +16,7 @@ The core forecasting pipeline uses a Poisson regression (a generalized linear mo
   * `forecasting_by_column.ipynb`: Core forecasting workflow applied across multiple taxonomies (e.g. “Risk Domain”, “Actor”). It demonstrates loading data, configuring ForecastConfig, and running forecast_by_category to generate forecasts and plots.
   * `model_evaluation.ipynb`: Implements one-year-ahead backtesting. It iterates over test years, fits models on training data, and records forecast vs actual counts and errors. This notebook computes MAE, MAPE, RMSE for each year and compares results to the naive baseline.
   * `calibration_analysis.ipynb`: Analyzes empirical coverage of prediction intervals. It varies uncertainty parameters and bootstraps to show how often actual counts fall inside the forecast intervals. Coverage vs. nominal confidence plots are generated to assess calibration.
+* `generate_diagrams_for_blog/` – Notebook and plotting scripts used to render figures and subplots for lab studio application.
 
 ## Installation
 

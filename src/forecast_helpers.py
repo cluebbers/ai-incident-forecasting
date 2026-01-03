@@ -123,6 +123,7 @@ class ForecastResult:
     ytd_year: int
     cat_col: str
     date_col: str
+    total_sims: Optional[np.ndarray] = None
 
 
 @dataclass
@@ -870,6 +871,7 @@ def _make_forecasts(
         ytd_year=cfg.YTD_YEAR,
         cat_col="",
         date_col="",
+        total_sims=tot_sim,
     )
 
 
@@ -938,12 +940,21 @@ def apply_to_columns(
 # Plotting helpers
 # ----------------------
 
-
+### OG function
 def plot_total_panel(
-    res: ForecastResult, diagnostics: Optional[ForecastDiagnostics] = None
+    res: ForecastResult,
+    diagnostics: Optional[ForecastDiagnostics] = None,
+    x_min: Optional[int] = None,
+    x_max: Optional[int] = None,
+    y_min: Optional[float] = None,
+    y_max: Optional[float] = None,
+    figsize: Optional[tuple] = None,
+    show_uncertainty: bool = True,
 ):
     """Enhanced total panel plot with clear uncertainty visualization"""
-    fig, ax = plt.subplots(constrained_layout=True, figsize=(6.25, 2.16))
+    fig, ax = plt.subplots(
+        constrained_layout=True, figsize=figsize if figsize is not None else (6.25, 2.16)
+    )
 
     # Multiple confidence levels
     alphas = [0.9]
@@ -960,15 +971,16 @@ def plot_total_panel(
     #         alpha=0.3,
     #         label=f"{int(100*alpha)}% PI",
     #     )
-    lo = res.fore_total_lo
-    hi = res.fore_total_hi
-    ax.fill_between(
-        res.years_fore,
-        lo,
-        hi,
-        alpha=0.3,
-        label=f"90% PI",
-    )
+    if show_uncertainty:
+        lo = res.fore_total_lo
+        hi = res.fore_total_hi
+        ax.fill_between(
+            res.years_fore,
+            lo,
+            hi,
+            alpha=0.3,
+            label="90% PI",
+        )
 
     actual_total = res.actual_by_year_full.sum(axis=1)
 
@@ -1001,7 +1013,19 @@ def plot_total_panel(
     ax.set_xlabel("Year")
     ax.set_ylabel("Count")
     ax.legend()
-    ax.set_ylim(bottom=-50)
+    x_min_auto = min(actual_total.index.min(), res.years_fore.min())
+    x_max_auto = max(actual_total.index.max(), res.years_fore.max())
+    ax.set_xlim(x_min if x_min is not None else x_min_auto,
+                x_max if x_max is not None else x_max_auto)
+    y_min_auto = -50
+    y_max_auto = max(
+        float(actual_total.max()),
+        float(res.fore_total_hi.max()) if res.fore_total_hi is not None else 0.0,
+    )
+    ax.set_ylim(
+        y_min if y_min is not None else y_min_auto,
+        y_max if y_max is not None else y_max_auto,
+    )
     ax.grid(True, lw=0.3, alpha=0.5)
     plt.tight_layout()
     output_path = os.path.join("../output/total_incidents.pdf")
@@ -1023,8 +1047,12 @@ def plot_total_panel(
         )
         plt.tight_layout()
 
-
-def plot_category_panels(res: ForecastResult, top_k: int | None = None):
+def plot_category_panels(
+    res: ForecastResult,
+    top_k: int | None = None,
+    max_year: Optional[int] = None,
+    show_legend: bool = True,
+):
     """
     One subplot per category (optionally only the top_k), shared y-lims,
     with actuals + forecast median + 90% PI. Creates one figure.
@@ -1149,10 +1177,11 @@ def plot_category_panels(res: ForecastResult, top_k: int | None = None):
         ax.set_title(subtitle)
         ax.set_ylabel("Count")
         ax.set_xlabel("Year" if j == n_rows - 1 else "")
-        ax.set_xlim(2006,2030)
+        right = max_year if max_year is not None else 2030
+        ax.set_xlim(2006, right)
         ax.set_ylim(ymin_plot, ymax_plot)
         ax.grid(True, lw=0.3, alpha=0.5)
-        if j == 0:
+        if show_legend and j == 0:
             base_title = f"Top {K} of {len(cats_all)}" if (top_k is not None) else None
             if base_title:
                 ax.legend(loc="upper left", fontsize=8, title=base_title)
