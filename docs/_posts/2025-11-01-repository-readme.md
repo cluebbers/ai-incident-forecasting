@@ -2,8 +2,11 @@
 layout: post
 title: "Repository Readme"
 categories: forecasting incidents
+authors:
+  - name: "Ahmed Elbashir"
+  - name: "Chamod Kalupahana"
+  - name: "Christopher L. Lübbers"
 ---
-# AI Incident Forecasting
 
 This repository contains code for forecasting trajectories of AI-related incident counts, developed during the [Apart AI Forecasting Hackathon](https://apartresearch.com/sprints/the-ai-forecasting-hackathon-2025-10-31-to-2025-11-02). We address three research questions: (RQ1) Forecasting future trajectories of total and category-level AI incident counts; (RQ2) Comparing one-year-ahead forecast accuracy to a naive baseline; and (RQ3) Assessing calibration of prediction intervals. The pipeline is implemented in Python and includes data loaders, forecasting utilities, and evaluation modules. Data are loaded from incident dataset (`classifications_MIT.csv` and `incidents.csv`), merged by incident ID, and normalized by date using the provided `data_loaders.py` functions.
 
