@@ -13,12 +13,6 @@ We build statistical models on the AI Incident Database to:
 - Quantify uncertainty using calibrated prediction intervals
 - Compare performance against naive baselines
 
-### Latest posts
-{% for post in site.posts limit:5 %}
-- **[{{ post.title }}]({{ post.url | relative_url }})**  
-  <small>{{ post.date | date: "%Y-%m-%d" }}</small>
-{% endfor %}
-
 ---
 
 **Repository:**  
