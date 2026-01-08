@@ -2,10 +2,10 @@
 layout: post
 title: "AI Incident Forecasting"
 categories: forecasting incidents
-authors:
-  - name: "Ahmed Elbashir"
-  - name: "Chamod Kalupahana"
-  - name: "Christopher L. Lübbers"
+author:
+  - Ahmed Elbashir
+  - Chamod Kalupahana
+  - Christopher L. Lübbers
 ---
 
 tl;dr

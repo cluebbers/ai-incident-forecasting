@@ -2,15 +2,11 @@
 layout: post
 title: "Hackathon Deliverable"
 categories: forecasting incidents
-authors:
-  - name: "Ahmed Elbashir"
-  - name: "Chamod Kalupahana"
-  - name: "Christopher L. Lübbers"
+author:
+  - Ahmed Elbashir
+  - Chamod Kalupahana
+  - Christopher L. Lübbers
 ---
-
-Ahmed Elbashir, Chamod Kalupahana, Christopher L. Lübbers
-With
-Apart Research
 
 ## Abstract
 
