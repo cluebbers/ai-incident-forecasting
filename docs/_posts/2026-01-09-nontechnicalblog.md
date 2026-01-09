@@ -9,6 +9,7 @@ author:
 ---
 
 tl;dr
+
 We trained statistical models on the AI Incidents Database and predicted that AI-related incidents could increase by 6-11x within the next five years, particularly in misuse, misinformation, and system safety issues. This post does not aim to prescribe specific policy interventions. Instead, it presents these forecasts as evidence to help prioritize which risk domains warrant policy attention and deeper evaluation.
 
 ## Introduction & Motivation
@@ -32,6 +33,7 @@ The closest existing work is [Stanford’s 2025 AI Index and Our World in Data](
 Unlike previous resources, our work builds a statistical forecast using mathematical models that project both the total number of recorded incidents and how that total is likely to split across incident types (risk domains*). We report calibrated uncertainty ranges, showing where our predictions might fall, rather than offering a single best guess.
 
 ![Figure 1: Flowchart for forecasting AI incidents: preprocess incident data, model totals and risk-domain shares, then calibrate uncertainty and plot final forecasts. Concepts in the highlighted process (a -> d) are shown in Figure 2.]({{ "/assets/images/flowchart.png" | relative_url }})
+
 Figure 1: Flowchart for forecasting AI incidents: preprocess incident data, model totals and risk-domain shares, then calibrate uncertainty and plot final forecasts. Concepts in the highlighted process (a -> d) are shown in Figure 2.
 
 ### Data Collection
@@ -44,6 +46,7 @@ However, the newest year is often incomplete due to reporting lag, the time dela
 We observed a marked increase in recorded AI-incident counts beginning around 2021. We added a hinge feature to divide the model into the time before and after the hinge, shown in process c). This lets us represent the spike in incidents after 2021 while keeping a stable model.
 
 ![Figure 2: Highlighted Processes from Figure 1 explained.]({{ "/assets/images/highlighted-process.png" | relative_url }})
+
 Figure 2: Highlighted Processes from Figure 1 explained.
 
 ### Poisson Regression
@@ -69,17 +72,20 @@ We use backtest-based calibration because it uses real recent errors to tune our
 ## Results
 
 ![Figure 3: Zoomed historical fit (top) and full forecast (bottom) for the total-incident model with 90% prediction intervals.]({{ "/assets/images/zoom.png" | relative_url }})
+
 Figure 3: Zoomed historical fit (top) and full forecast (bottom) for the total-incident model with 90% prediction intervals.
 
 Our forecast projects a 6- to 11-fold increase in incidents by 2030. This is rapid, compounding growth, not a slow rise. Even our lowest prediction, 6x, shows a major increase.
 In our backtests, our model didn’t always outperform the baseline each year, but it performed much better in 2024, when incidents surged. We argue this is an important tradeoff since modelling acceleration matters most when the world shifts quickly.
 
 ![Figure 4: Backtest comparison (2022–2024) showing Poisson Regression model vs naive baseline predictions against the observed totals.]({{ "/assets/images/calibration.png" | relative_url }})
+
 Figure 4: Backtest comparison (2022–2024) showing Poisson Regression model vs naive baseline predictions against the observed totals.
 
 Our forecasts by area show the fastest growth in harmful misuse, misinformation, and system safety failures. Other domains also rise, but these are most prominent under our assumptions.
 
 ![Figure 5: Forecasts for the top 3 of 7 risk domains, showing historical counts and 90% prediction intervals through 2030. Top 3 risk domains are: malicious misuse, misinformation, and system safety failures.]({{ "/assets/images/incidents_category.png" | relative_url }})
+
 Figure 5: Forecasts for the top 3 of 7 risk domains, showing historical counts and 90% prediction intervals through 2030. Top 3 risk domains are: malicious misuse, misinformation, and system safety failures.
 
 ## Conclusion
@@ -117,13 +123,19 @@ We thank Apart Research for hosting the AI Forecasting Hackathon that initiated 
 ## Additional References
 
 [AI Forecasting Hackathon](https://apartresearch.com/sprints/the-ai-forecasting-hackathon-2025-10-31-to-2025-11-02)
+
 [GitHub Repository](https://github.com/cluebbers/ai-incident-forecasting)
+
 [AI Incident Database](https://incidentdatabase.ai/)
+
 Paper on AI Incident Database: [Preventing Repeated Real World AI Failures by Cataloging Incidents: The AI Incident Database](https://arxiv.org/abs/2011.08512)
+
 Paper on MIT MIT AI Risk Repository Taxonomy: [A Comprehensive Meta-Review, Database, and Taxonomy of Risks From Artificial Intelligence](https://arxiv.org/abs/2408.12622)
 
 ## Footnotes
 
 *Risk domain: A board category of risk as defined by MIT AI Risk Repository by this link
+
 **Year-to-date assimilation means we estimate a full-year total from partial-year data by using historical seasonality in reporting; this is a pragmatic fix for reporting lag, not a claim about when incidents truly occurred.
+
 ***“Surge” means a category’s share increased sharply in the most recent period compared to its earlier baseline; we use this to avoid underreacting to sudden shifts.
