@@ -9,7 +9,7 @@ author:
 ---
 
 tl;dr
-We trained statistical models on the AI Incidents Database and predicted that AI-related incidents could increase by 6-11x within the next five years, particularly in misuse, misinformation, and system safety issues. We suggest using these forecasts as evidence to prioritize which risk domains warrant policy attention and deeper evaluation, rather than prescribing specific interventions.
+We trained statistical models on the AI Incidents Database and predicted that AI-related incidents could increase by 6-11x within the next five years, particularly in misuse, misinformation, and system safety issues. This post does not aim to prescribe specific policy interventions. Instead, it presents these forecasts as evidence to help prioritize which risk domains warrant policy attention and deeper evaluation.
 
 ## Introduction & Motivation
 
