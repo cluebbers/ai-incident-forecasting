@@ -32,6 +32,7 @@ def plot_total_panel_subplots(
     figsize: Optional[tuple] = None,
     show_uncertainty: bool = True,
     output_name: str = "total_incidents.pdf",
+    dpi: int = 300,
 ):
     """Two-panel view: historical fit (top) and full forecast (bottom)."""
     fig, (ax_top, ax_bottom) = plt.subplots(
@@ -103,7 +104,7 @@ def plot_total_panel_subplots(
     ax_top.legend()
 
     output_path = _format_output_path(output_name)
-    plt.savefig(output_path, dpi=300)
+    plt.savefig(output_path, dpi=dpi)
 
     if diagnostics:
         ax2 = ax_bottom.twinx()
